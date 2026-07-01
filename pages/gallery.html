@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse the WellSphere gallery — photo moments from our fitness sessions, mindfulness meets, nutrition workshops and community events at Asia Pacific University.">
+  <meta name="author" content="WellSphere Student Organization">
+  <title>Gallery — WellSphere</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="../index.html">
+        <span class="logo">W</span>
+        <div><b>WellSphere</b><span>APU Health &amp; Wellness</span></div>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="has-drop"><a href="#">Programs</a>
+          <ul class="dropdown">
+            <li><a href="fitness.html"><span class="ic">🏃</span> Fitness &amp; Exercise</a></li>
+            <li><a href="mental-health.html"><span class="ic">🧘</span> Mental Wellness</a></li>
+            <li><a href="nutrition.html"><span class="ic">🥗</span> Nutrition &amp; Eating</a></li>
+          </ul>
+        </li>
+        <li><a href="events.html">Events</a></li>
+        <li class="has-drop"><a href="#">Resources</a>
+          <ul class="dropdown">
+            <li><a href="blog.html"><span class="ic">📝</span> Blog &amp; Articles</a></li>
+            <li><a href="resources.html"><span class="ic">📚</span> Wellness Resources</a></li>
+            <li><a href="gallery.html"><span class="ic">📷</span> Gallery</a></li>
+            <li><a href="faq.html"><span class="ic">❓</span> FAQ</a></li>
+          </ul>
+        </li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+        <a class="btn btn-primary" href="membership.html">Join Us</a>
+        <button class="nav-toggle" aria-label="Open menu"><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb"><a href="../index.html">Home</a> / Gallery</div>
+        <h1>Our Gallery</h1>
+        <p>A snapshot of life at WellSphere — moments captured across our events, workshops and everyday wellness activities.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Moments &amp; Memories</span>
+          <h2>Explore the <span class="gradient-text">WellSphere Community</span></h2>
+          <p class="lead">From sunrise yoga to bustling wellness fairs, every photo tells the story of students showing up for their health. Filter by category, or tap any image to view it up close.</p>
+        </div>
+
+        <div class="gallery-filter">
+          <button class="chip selected" data-filter="all">All</button>
+          <button class="chip" data-filter="fitness">Fitness</button>
+          <button class="chip" data-filter="mind">Mindfulness</button>
+          <button class="chip" data-filter="nutrition">Nutrition</button>
+          <button class="chip" data-filter="community">Community</button>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+          <div class="g-item" data-cat="fitness"><img src="../images/gallery1.svg" alt="Students in a morning yoga session on the campus lawn" data-lightbox data-full="../images/gallery1.svg"><span class="cap">Morning Yoga</span></div>
+          <div class="g-item" data-cat="fitness"><img src="../images/gallery2.svg" alt="Participants crossing the finish line at the WellSphere fun run" data-lightbox data-full="../images/gallery2.svg"><span class="cap">Fun Run</span></div>
+          <div class="g-item" data-cat="fitness"><img src="../images/gallery6.svg" alt="Students taking part in a group fitness challenge workout" data-lightbox data-full="../images/gallery6.svg"><span class="cap">Fitness Challenge</span></div>
+          <div class="g-item" data-cat="mind"><img src="../images/gallery4.svg" alt="A calm mindfulness practice circle in a quiet studio" data-lightbox data-full="../images/gallery4.svg"><span class="cap">Mindfulness</span></div>
+          <div class="g-item" data-cat="mind"><img src="../images/gallery11.svg" alt="Students meditating together during a guided meditation hour" data-lightbox data-full="../images/gallery11.svg"><span class="cap">Meditation Hour</span></div>
+          <div class="g-item" data-cat="mind"><img src="../images/gallery12.svg" alt="Friends chatting over herbal tea at a relaxed Tea and Talk session" data-lightbox data-full="../images/gallery12.svg"><span class="cap">Tea &amp; Talk</span></div>
+          <div class="g-item" data-cat="nutrition"><img src="../images/gallery3.svg" alt="Students learning to prepare healthy meals in a cooking class" data-lightbox data-full="../images/gallery3.svg"><span class="cap">Cooking Class</span></div>
+          <div class="g-item" data-cat="nutrition"><img src="../images/gallery7.svg" alt="A colourful spread of nutritious snacks at a nutrition workshop" data-lightbox data-full="../images/gallery7.svg"><span class="cap">Healthy Snacks</span></div>
+          <div class="g-item" data-cat="community"><img src="../images/gallery10.svg" alt="A group of students on a guided nature walk through green trails" data-lightbox data-full="../images/gallery10.svg"><span class="cap">Nature Walk</span></div>
+          <div class="g-item" data-cat="community"><img src="../images/gallery5.svg" alt="Booths and visitors at the annual campus wellness fair" data-lightbox data-full="../images/gallery5.svg"><span class="cap">Wellness Fair</span></div>
+          <div class="g-item" data-cat="community"><img src="../images/gallery8.svg" alt="Students cheering during a lively inter-club sports day" data-lightbox data-full="../images/gallery8.svg"><span class="cap">Sports Day</span></div>
+          <div class="g-item" data-cat="community"><img src="../images/gallery9.svg" alt="Volunteers running a mental health awareness week stall" data-lightbox data-full="../images/gallery9.svg"><span class="cap">Awareness Week</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band reveal">
+          <h2>Want to be in the next photo?</h2>
+          <p>Our best moments happen when you show up. Join our upcoming events and become part of the WellSphere story.</p>
+          <div class="center-btns">
+            <a class="btn btn-primary btn-lg" href="events.html">See Upcoming Events</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../index.html">
+            <span class="logo">W</span>
+            <div><b>WellSphere</b><span>APU Health &amp; Wellness</span></div>
+          </a>
+          <p>Building healthier students, one habit at a time. A student-led wellness community at Asia Pacific University — open to everyone.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Instagram">📸</a>
+            <a href="#" aria-label="Twitter / X">🐦</a>
+            <a href="#" aria-label="YouTube">▶️</a>
+            <a href="#" aria-label="LinkedIn">💼</a>
+          </div>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="events.html">Events</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="membership.html">Membership</a>
+          </div>
+        </div>
+        <div>
+          <h4>Programs</h4>
+          <div class="footer-links">
+            <a href="fitness.html">Fitness</a>
+            <a href="mental-health.html">Mental Wellness</a>
+            <a href="nutrition.html">Nutrition</a>
+            <a href="blog.html">Blog</a>
+            <a href="resources.html">Resources</a>
+          </div>
+        </div>
+        <div>
+          <h4>Stay in the loop</h4>
+          <p style="color:#94a3b8;font-size:.92rem">Weekly wellness tips, straight to your inbox. No spam, ever.</p>
+          <form class="footer-news" data-newsletter>
+            <input type="email" placeholder="Your email" aria-label="Email address" required>
+            <button type="submit">Go</button>
+          </form>
+          <p style="color:#94a3b8;font-size:.86rem;margin-top:1rem">✉️ hello@wellsphere.apu.edu<br>📍 APU Campus, Kuala Lumpur</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> WellSphere Student Organization · Asia Pacific University</span>
+        <span>Made with 💚 for the FDD module · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../javascript/script.js"></script>
+</body>
+</html>

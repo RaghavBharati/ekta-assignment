@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fb7185"/><stop offset="1" stop-color="#e11d48"/>
+    </linearGradient>
+    <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2.2" fill="rgba(255,255,255,.10)"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="400" fill="url(#g)"/>
+  <rect width="400" height="400" fill="url(#dots)"/>
+  <text x="50%" y="46%" font-size="100" text-anchor="middle" dominant-baseline="central">🧑‍🍳</text>
+  <text x="50%" y="74%" font-size="28" fill="#ffffff" font-family="Poppins,Segoe UI,Arial" font-weight="700" text-anchor="middle" opacity="0.95">Nutrition Lead</text>
+</svg>

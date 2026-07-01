@@ -1,0 +1,2 @@
+Drop hero background videos and workout clips here (e.g. hero-bg.mp4, workout-hiit.mp4).
+The site works fully without them — image posters are used as fallbacks.

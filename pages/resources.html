@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WellSphere Wellness Resources — downloadable guides, an interactive wellness quiz, and health calculators for BMI, water intake and daily calorie needs.">
+  <meta name="author" content="WellSphere Student Organization">
+  <title>Wellness Resources — WellSphere</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="../index.html">
+        <span class="logo">W</span>
+        <div><b>WellSphere</b><span>APU Health &amp; Wellness</span></div>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="has-drop"><a href="#">Programs</a>
+          <ul class="dropdown">
+            <li><a href="fitness.html"><span class="ic">🏃</span> Fitness &amp; Exercise</a></li>
+            <li><a href="mental-health.html"><span class="ic">🧘</span> Mental Wellness</a></li>
+            <li><a href="nutrition.html"><span class="ic">🥗</span> Nutrition &amp; Eating</a></li>
+          </ul>
+        </li>
+        <li><a href="events.html">Events</a></li>
+        <li class="has-drop"><a href="#">Resources</a>
+          <ul class="dropdown">
+            <li><a href="blog.html"><span class="ic">📝</span> Blog &amp; Articles</a></li>
+            <li><a href="resources.html"><span class="ic">📚</span> Wellness Resources</a></li>
+            <li><a href="gallery.html"><span class="ic">📷</span> Gallery</a></li>
+            <li><a href="faq.html"><span class="ic">❓</span> FAQ</a></li>
+          </ul>
+        </li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+        <a class="btn btn-primary" href="membership.html">Join Us</a>
+        <button class="nav-toggle" aria-label="Open menu"><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb"><a href="../index.html">Home</a> / Resources</div>
+        <h1>Wellness Resources</h1>
+        <p>Free tools, downloadable guides and trusted helplines to help you build healthier student habits — one step at a time.</p>
+      </div>
+    </section>
+
+    <!-- ===== SECTION A — DOWNLOADABLE GUIDES ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Free Downloads</span>
+          <h2>Downloadable Guides</h2>
+          <p>Practical PDFs you can keep on your phone or print out — built by WellSphere students for busy student life.</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card reveal">
+            <div class="card-ic">📄</div>
+            <h3>Healthy Meal Prep Guide</h3>
+            <p>Batch-cook balanced meals for a whole week on a student budget, with a ready-made shopping list.</p>
+            <button class="btn btn-ghost" onclick="window.wsToast &amp;&amp; wsToast('📥 Download starting…')">Download PDF</button>
+          </article>
+          <article class="card reveal">
+            <div class="card-ic">🧘</div>
+            <h3>5-Minute Meditation Scripts</h3>
+            <p>Guided breathing and grounding scripts you can read or record for quick calm between classes.</p>
+            <button class="btn btn-ghost" onclick="window.wsToast &amp;&amp; wsToast('📥 Download starting…')">Download PDF</button>
+          </article>
+          <article class="card reveal">
+            <div class="card-ic">🏋️</div>
+            <h3>Beginner Workout Plan (PDF)</h3>
+            <p>A four-week, no-equipment routine that eases you into regular movement from wherever you are.</p>
+            <button class="btn btn-ghost" onclick="window.wsToast &amp;&amp; wsToast('📥 Download starting…')">Download PDF</button>
+          </article>
+          <article class="card reveal">
+            <div class="card-ic">😴</div>
+            <h3>Sleep Better Checklist</h3>
+            <p>A simple night-time routine and bedroom checklist to help you fall asleep faster and wake up rested.</p>
+            <button class="btn btn-ghost" onclick="window.wsToast &amp;&amp; wsToast('📥 Download starting…')">Download PDF</button>
+          </article>
+          <article class="card reveal">
+            <div class="card-ic">💧</div>
+            <h3>Hydration Tracker</h3>
+            <p>A printable daily tracker to hit your water goals and spot when you tend to fall behind.</p>
+            <button class="btn btn-ghost" onclick="window.wsToast &amp;&amp; wsToast('📥 Download starting…')">Download PDF</button>
+          </article>
+          <article class="card reveal">
+            <div class="card-ic">📚</div>
+            <h3>Exam Stress Toolkit</h3>
+            <p>Study-planning templates, breathing exercises and quick resets to keep calm through exam season.</p>
+            <button class="btn btn-ghost" onclick="window.wsToast &amp;&amp; wsToast('📥 Download starting…')">Download PDF</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION B — WELLNESS QUIZ ===== -->
+    <section class="section tint" id="quiz">
+      <div class="container">
+        <div class="section-head reveal"><span class="eyebrow">Interactive</span><h2>How Healthy Is Your Student Lifestyle?</h2><p>Answer 5 quick questions for your personalised wellness score.</p></div>
+        <div class="widget reveal" id="wellnessQuiz" data-dash="dashboard.html">
+          <div class="quiz-q">
+            <p class="q-text">1. How many hours do you sleep on a typical night?</p>
+            <div class="quiz-options">
+              <button type="button" class="quiz-opt" data-score="1">Less than 5 hours</button>
+              <button type="button" class="quiz-opt" data-score="2">5–6 hours</button>
+              <button type="button" class="quiz-opt" data-score="3">6–7 hours</button>
+              <button type="button" class="quiz-opt" data-score="4">7–9 hours</button>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p class="q-text">2. How often do you exercise or do at least 30 minutes of activity?</p>
+            <div class="quiz-options">
+              <button type="button" class="quiz-opt" data-score="1">Rarely or never</button>
+              <button type="button" class="quiz-opt" data-score="2">Once a week</button>
+              <button type="button" class="quiz-opt" data-score="3">2–3 times a week</button>
+              <button type="button" class="quiz-opt" data-score="4">4 or more times a week</button>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p class="q-text">3. How many servings of fruit &amp; vegetables do you eat per day?</p>
+            <div class="quiz-options">
+              <button type="button" class="quiz-opt" data-score="1">None on most days</button>
+              <button type="button" class="quiz-opt" data-score="2">1 serving</button>
+              <button type="button" class="quiz-opt" data-score="3">2–3 servings</button>
+              <button type="button" class="quiz-opt" data-score="4">4 or more servings</button>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p class="q-text">4. How would you describe your usual stress level?</p>
+            <div class="quiz-options">
+              <button type="button" class="quiz-opt" data-score="1">Overwhelmed most of the time</button>
+              <button type="button" class="quiz-opt" data-score="2">Often stressed</button>
+              <button type="button" class="quiz-opt" data-score="3">Manageable most days</button>
+              <button type="button" class="quiz-opt" data-score="4">Calm and in control</button>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p class="q-text">5. How much water do you drink on a typical day?</p>
+            <div class="quiz-options">
+              <button type="button" class="quiz-opt" data-score="1">Less than 2 glasses</button>
+              <button type="button" class="quiz-opt" data-score="2">2–4 glasses</button>
+              <button type="button" class="quiz-opt" data-score="3">5–6 glasses</button>
+              <button type="button" class="quiz-opt" data-score="4">7 or more glasses</button>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-lg" id="quizSubmit">See my wellness score →</button>
+          <div class="result-box" id="quizResult"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION C — HEALTH CALCULATORS ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Interactive</span>
+          <h2>Health Calculators</h2>
+          <p>Quick, private estimates to help you set realistic goals. Nothing is stored — it all runs in your browser.</p>
+        </div>
+        <div class="grid grid-3">
+          <div class="widget reveal"><h3>⚖️ BMI Calculator</h3>
+            <div class="field"><label for="bmiHeight">Height (cm)</label><input class="input" id="bmiHeight" type="number" placeholder="170"></div>
+            <div class="field"><label for="bmiWeight">Weight (kg)</label><input class="input" id="bmiWeight" type="number" placeholder="65"></div>
+            <button class="btn btn-primary mt-2" id="bmiCalc">Calculate BMI</button>
+            <div class="result-box" id="bmiResult"></div>
+          </div>
+
+          <div class="widget reveal"><h3>💧 Water Intake</h3>
+            <div class="field"><label for="waterWeight">Weight (kg)</label><input class="input" id="waterWeight" type="number" placeholder="65"></div>
+            <div class="field"><label for="waterActivity">Exercise (hours/day)</label><input class="input" id="waterActivity" type="number" step="0.5" placeholder="1"></div>
+            <button class="btn btn-primary mt-2" id="waterCalc">Calculate</button>
+            <div class="result-box" id="waterResult"></div>
+          </div>
+
+          <div class="widget reveal"><h3>🔥 Calorie Needs</h3>
+            <div class="field"><label for="calAge">Age</label><input class="input" id="calAge" type="number" placeholder="20"></div>
+            <div class="field"><label for="calHeight">Height (cm)</label><input class="input" id="calHeight" type="number" placeholder="170"></div>
+            <div class="field"><label for="calWeight">Weight (kg)</label><input class="input" id="calWeight" type="number" placeholder="65"></div>
+            <div class="field"><label for="calSex">Sex</label><select class="select" id="calSex"><option value="male">Male</option><option value="female">Female</option></select></div>
+            <div class="field"><label for="calActivity">Activity</label><select class="select" id="calActivity"><option value="1.2">Sedentary</option><option value="1.375">Lightly active</option><option value="1.55">Moderately active</option><option value="1.725">Very active</option></select></div>
+            <button class="btn btn-primary mt-2" id="calorieCalc">Calculate</button>
+            <div class="result-box" id="calorieResult"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION D — USEFUL LINKS & HELPLINES ===== -->
+    <section class="section tint">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Support</span>
+          <h2>Useful Links &amp; Helplines</h2>
+          <p>Trusted places to learn more or reach out for help. If you are struggling, you are not alone — support is always available.</p>
+        </div>
+        <div class="grid grid-2">
+          <article class="card reveal">
+            <div class="card-ic">🌍</div>
+            <h3>Trusted Health &amp; Nutrition Guides</h3>
+            <ul class="check-list">
+              <li><a href="#">World Health Organization (WHO) — Healthy Living</a></li>
+              <li><a href="#">National Nutrition Guidelines &amp; Food Pyramid</a></li>
+              <li><a href="#">Physical Activity Guidelines for Young Adults</a></li>
+              <li><a href="#">Sleep Foundation — Student Sleep Hygiene</a></li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <div class="card-ic">💬</div>
+            <h3>Mental Health &amp; Counselling</h3>
+            <ul class="check-list">
+              <li><a href="#">APU Student Counselling Service</a></li>
+              <li><a href="#">24/7 Mental Health Crisis Helpline</a></li>
+              <li><a href="#">Befrienders — Emotional Support Line</a></li>
+              <li><a href="#">Student Peer Support Network</a></li>
+            </ul>
+            <p class="form-note">All helplines and the APU counselling service are free and completely confidential.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../index.html">
+            <span class="logo">W</span>
+            <div><b>WellSphere</b><span>APU Health &amp; Wellness</span></div>
+          </a>
+          <p>Building healthier students, one habit at a time. A student-led wellness community at Asia Pacific University — open to everyone.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Instagram">📸</a>
+            <a href="#" aria-label="Twitter / X">🐦</a>
+            <a href="#" aria-label="YouTube">▶️</a>
+            <a href="#" aria-label="LinkedIn">💼</a>
+          </div>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="events.html">Events</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="membership.html">Membership</a>
+          </div>
+        </div>
+        <div>
+          <h4>Programs</h4>
+          <div class="footer-links">
+            <a href="fitness.html">Fitness</a>
+            <a href="mental-health.html">Mental Wellness</a>
+            <a href="nutrition.html">Nutrition</a>
+            <a href="blog.html">Blog</a>
+            <a href="resources.html">Resources</a>
+          </div>
+        </div>
+        <div>
+          <h4>Stay in the loop</h4>
+          <p style="color:#94a3b8;font-size:.92rem">Weekly wellness tips, straight to your inbox. No spam, ever.</p>
+          <form class="footer-news" data-newsletter>
+            <input type="email" placeholder="Your email" aria-label="Email address" required>
+            <button type="submit">Go</button>
+          </form>
+          <p style="color:#94a3b8;font-size:.86rem;margin-top:1rem">✉️ hello@wellsphere.apu.edu<br>📍 APU Campus, Kuala Lumpur</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> WellSphere Student Organization · Asia Pacific University</span>
+        <span>Made with 💚 for the FDD module · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../javascript/script.js"></script>
+</body>
+</html>
