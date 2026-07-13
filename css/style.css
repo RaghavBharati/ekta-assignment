@@ -662,6 +662,13 @@ h1 .ico, h2 .ico, h3 .ico, h4 .ico, .badge .ico { margin-right: .12em; }
 .pill-row { display: flex; gap: .5rem; flex-wrap: wrap; }
 .divider { height:1px; background: var(--line); margin: 2rem 0; }
 .rounded-img { border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow:hidden; }
+/* Responsive embedded map (e.g. contact "Find us" section) */
+.map-embed {
+  position: relative; width: 100%; aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow); border: 1px solid var(--line); background: var(--surface-3);
+}
+.map-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
 /* Gentle float — composited on the GPU so it never judders. Uses the `translate`
    property (not `transform`) so it can coexist with a `transform`-based reveal. */
 .floaty { animation: floaty 6s ease-in-out infinite; will-change: translate; transform: translateZ(0); backface-visibility: hidden; }
