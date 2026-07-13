@@ -9,6 +9,6 @@
   </defs>
   <rect width="700" height="900" fill="url(#g)"/>
   <rect width="700" height="900" fill="url(#dots)"/>
-  <text x="50%" y="46%" font-size="225" text-anchor="middle" dominant-baseline="central">💪</text>
-  <text x="50%" y="74%" font-size="64" fill="#ffffff" font-family="Poppins,Segoe UI,Arial" font-weight="700" text-anchor="middle" opacity="0.95">Fitness Challenge</text>
+  <g transform="translate(257.8 321.8) scale(7.687)" fill="none" stroke="#ffffff" color="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.96"><path d="M4 9v6M6.5 8v8M17.5 8v8M20 9v6M6.5 12h11"/></g>
+  <text x="50%" y="74%" font-size="64" fill="#ffffff" font-family="Lora,Georgia,serif" font-weight="700" text-anchor="middle" opacity="0.95">Fitness Challenge</text>
 </svg>

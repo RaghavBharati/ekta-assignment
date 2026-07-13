@@ -9,6 +9,6 @@
   </defs>
   <rect width="800" height="600" fill="url(#g)"/>
   <rect width="800" height="600" fill="url(#dots)"/>
-  <text x="50%" y="46%" font-size="150" text-anchor="middle" dominant-baseline="central">🎉</text>
-  <text x="50%" y="74%" font-size="42" fill="#ffffff" font-family="Poppins,Segoe UI,Arial" font-weight="700" text-anchor="middle" opacity="0.95">Awareness Week</text>
+  <g transform="translate(338.5 214.5) scale(5.125)" fill="none" stroke="#ffffff" color="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.96"><path d="M4 20l4.8-12.5 7.7 7.7L4 20Z"/><path d="M4 20l7.3-2.2M8.8 7.5l7.7 7.7"/><path d="M15 4v2.4M18.5 7.5H21M16.8 10.6 18.5 9"/></g>
+  <text x="50%" y="74%" font-size="42" fill="#ffffff" font-family="Lora,Georgia,serif" font-weight="700" text-anchor="middle" opacity="0.95">Awareness Week</text>
 </svg>

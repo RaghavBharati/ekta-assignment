@@ -9,6 +9,6 @@
   </defs>
   <rect width="700" height="800" fill="url(#g)"/>
   <rect width="700" height="800" fill="url(#dots)"/>
-  <text x="50%" y="46%" font-size="200" text-anchor="middle" dominant-baseline="central">🏃‍♂️</text>
-  <text x="50%" y="74%" font-size="57" fill="#ffffff" font-family="Poppins,Segoe UI,Arial" font-weight="700" text-anchor="middle" opacity="0.95">Fun Run</text>
+  <g transform="translate(268.0 286.0) scale(6.833)" fill="none" stroke="#ffffff" color="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.96"><circle cx="14" cy="5" r="1.9" fill="currentColor" stroke="none"/><path d="M12.5 8.5 9 11l-3.5.5M12.5 8.5l3 2 3 .5M12.5 8.5 11 14l3 2 .5 4M11 14l-3.5 1L6 20"/></g>
+  <text x="50%" y="74%" font-size="57" fill="#ffffff" font-family="Lora,Georgia,serif" font-weight="700" text-anchor="middle" opacity="0.95">Fun Run</text>
 </svg>

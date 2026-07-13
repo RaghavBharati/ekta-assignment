@@ -11,6 +11,6 @@
   <rect width="800" height="500" fill="url(#dots)"/>
   <circle cx="656" cy="100" r="83" fill="rgba(255,255,255,.08)"/>
   <circle cx="112" cy="430" r="62" fill="rgba(255,255,255,.07)"/>
-  <text x="50%" y="44%" font-size="100" text-anchor="middle" dominant-baseline="central">💧</text>
-  <text x="50%" y="70%" font-size="31" fill="#ffffff" font-family="Poppins,Segoe UI,Arial" font-weight="700" letter-spacing="0.5" text-anchor="middle" opacity="0.95">Stay Hydrated</text>
+  <g transform="translate(359.0 179.0) scale(3.417)" fill="none" stroke="#ffffff" color="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.96"><path d="M12 3.2s6 6.3 6 10.3A6 6 0 1 1 6 13.5C6 9.5 12 3.2 12 3.2Z" fill="currentColor" stroke="none"/></g>
+  <text x="50%" y="70%" font-size="31" fill="#ffffff" font-family="Lora,Georgia,serif" font-weight="700" letter-spacing="0.5" text-anchor="middle" opacity="0.95">Stay Hydrated</text>
 </svg>

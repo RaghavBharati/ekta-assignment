@@ -11,6 +11,6 @@
   <rect width="1000" height="800" fill="url(#dots)"/>
   <circle cx="820" cy="160" r="133" fill="rgba(255,255,255,.08)"/>
   <circle cx="140" cy="688" r="100" fill="rgba(255,255,255,.07)"/>
-  <text x="50%" y="44%" font-size="160" text-anchor="middle" dominant-baseline="central">🤝</text>
-  <text x="50%" y="70%" font-size="50" fill="#ffffff" font-family="Poppins,Segoe UI,Arial" font-weight="700" letter-spacing="0.5" text-anchor="middle" opacity="0.95">Our Community</text>
+  <g transform="translate(434.4 286.4) scale(5.467)" fill="none" stroke="#ffffff" color="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.96"><path d="M12 6.5 9.5 5 3 8.5v6l3 1M12 6.5l2.5-1.5L21 8.5v6l-3 1M6 15.5l3 2.5 2-1.8 2.5 2 2.5-2.2M9 12l2 2"/></g>
+  <text x="50%" y="70%" font-size="50" fill="#ffffff" font-family="Lora,Georgia,serif" font-weight="700" letter-spacing="0.5" text-anchor="middle" opacity="0.95">Our Community</text>
 </svg>

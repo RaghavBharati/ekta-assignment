@@ -1,5 +1,5 @@
 /* ==========================================================================
-   WellSphere — Student Health & Wellness Community
+   WellSphere — Health & Wellness Community
    Master Stylesheet
    --------------------------------------------------------------------------
    1.  Design Tokens (CSS Variables) + Dark Mode
@@ -53,8 +53,8 @@
   --radius-lg:    28px;
 
   /* Type */
-  --font-head: "Poppins", "Segoe UI", system-ui, sans-serif;
-  --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-head: "Lora", Georgia, "Times New Roman", serif;
+  --font-body: "Lato", "Segoe UI", system-ui, sans-serif;
 
   --ease: cubic-bezier(.2,.7,.2,1);
   --nav-h: 72px;
@@ -106,16 +106,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 h1, h2, h3, h4, h5 {
   font-family: var(--font-head);
   color: var(--ink);
-  line-height: 1.15;
+  line-height: 1.25;
   font-weight: 700;
-  letter-spacing: -.02em;
+  letter-spacing: -.01em;
 }
-h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); }
-h2 { font-size: clamp(1.8rem, 3.5vw, 2.7rem); }
-h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); }
+h1 { font-size: clamp(2.2rem, 5vw, 3.7rem); line-height: 1.15; }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+h3 { font-size: clamp(1.25rem, 2vw, 1.55rem); }
 h4 { font-size: 1.15rem; }
-p  { margin-bottom: 1rem; }
-.lead { font-size: 1.2rem; color: var(--muted); }
+h5 { font-size: 1rem; }
+p  { margin-bottom: 1rem; line-height: 1.75; }
+p:last-child { margin-bottom: 0; }
+li { line-height: 1.7; }
+.lead { font-size: 1.2rem; line-height: 1.7; color: var(--muted); }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: .5rem;
@@ -130,6 +133,20 @@ p  { margin-bottom: 1rem; }
   background: var(--grad-hero);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
+
+/* SVG icons (replace decorative emoji) — scale with font-size, inherit colour */
+.ico { display: inline-flex; align-items: center; justify-content: center; line-height: 0; vertical-align: -0.14em; }
+.ico > svg, svg.ico-svg { width: 1em; height: 1em; display: block; flex: none; }
+.card-ic { color: var(--green-dark); }
+[data-theme="dark"] .card-ic { color: var(--green); }
+.dropdown a .ic { color: var(--green-dark); display: inline-flex; }
+[data-theme="dark"] .dropdown a .ic { color: var(--green); }
+.mood .emoji { color: var(--green-dark); }
+[data-theme="dark"] .mood .emoji { color: var(--green); }
+.trophy .ic { color: var(--green-dark); display: inline-flex; justify-content: center; }
+[data-theme="dark"] .trophy .ic { color: var(--green); }
+/* icons that sit before heading/badge text get a touch of breathing room */
+h1 .ico, h2 .ico, h3 .ico, h4 .ico, .badge .ico { margin-right: .12em; }
 
 /* 4. LAYOUT ================================================================ */
 .container { width: min(1180px, 92%); margin-inline: auto; }
@@ -256,24 +273,42 @@ p  { margin-bottom: 1rem; }
 
 /* 7. HERO ================================================================== */
 .hero {
-  position: relative; min-height: calc(100vh - var(--nav-h));
-  display: grid; align-items: center;
+  position: relative; min-height: clamp(560px, 88vh, 940px);
+  display: grid; place-items: center; text-align: center;
   color: #fff; overflow: hidden; isolation: isolate;
+  background: var(--grad-hero);
 }
-.hero-media { position: absolute; inset: 0; z-index: -2; }
-.hero-media img, .hero-media video { width: 100%; height: 100%; object-fit: cover; }
-.hero::after {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(120deg, rgba(5,102,73,.92) 0%, rgba(2,132,199,.78) 55%, rgba(15,23,42,.55) 100%);
+/* Soft glow layers so the centre stays clean and the text reads clearly */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 55% at 50% 45%, rgba(255,255,255,.16), transparent 70%),
+    radial-gradient(120% 120% at 50% 100%, rgba(15,23,42,.28), transparent 60%);
 }
-.hero-inner { padding: 5rem 0; max-width: 760px; }
-.hero h1 { color: #fff; margin: 1rem 0; text-shadow: 0 2px 30px rgba(0,0,0,.25); }
-.hero p { font-size: 1.25rem; color: rgba(255,255,255,.92); max-width: 600px; }
+
+/* Decorative doodles — kept to the corners so they never clash with the text */
+.hero-doodles { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.doodle {
+  position: absolute; color: rgba(255,255,255,.5);
+  width: clamp(96px, 15vw, 230px); will-change: transform, translate;
+  animation: floaty 7s ease-in-out infinite;
+}
+.doodle svg { width: 100%; height: auto; display: block; }
+.doodle.d-tl { top: 4%;  left: 1.5%; color: rgba(255,255,255,.42); animation-duration: 8s; }
+.doodle.d-tr { top: 6%;  right: 2%;  animation-duration: 9s; animation-delay: -2s; }
+.doodle.d-bl { bottom: 6%; left: 3%; animation-duration: 8.5s; animation-delay: -3s; color: rgba(255,255,255,.46); }
+.doodle.d-br { bottom: 4%; right: 1.5%; animation-duration: 7.5s; animation-delay: -1s; }
+
+.hero-inner { position: relative; z-index: 2; padding: 6rem 0; max-width: 820px; margin-inline: auto; }
+.hero h1 { color: #fff; margin: 1.1rem auto; text-shadow: 0 2px 30px rgba(0,0,0,.22); }
+.hero p { font-size: 1.25rem; color: rgba(255,255,255,.94); max-width: 620px; margin: 0 auto 1rem; }
 .hero .eyebrow { background: rgba(255,255,255,.18); color: #fff; backdrop-filter: blur(4px); }
-.hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
-.hero-stats { display: flex; gap: 2.5rem; margin-top: 3rem; flex-wrap: wrap; }
-.hero-stats .num { font-family: var(--font-head); font-size: 2.2rem; font-weight: 800; }
-.hero-stats small { color: rgba(255,255,255,.8); font-size: .9rem; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.2rem; justify-content: center; }
+.hero-stats { display: flex; gap: 2.5rem; margin-top: 3rem; flex-wrap: wrap; justify-content: center; }
+.hero-stats > div { min-width: 96px; }
+.hero-stats .num { font-family: var(--font-head); font-size: 2.2rem; font-weight: 700; }
+.hero-stats small { color: rgba(255,255,255,.82); font-size: .9rem; }
+@media (max-width: 600px) { .hero-inner { padding: 4.5rem 0; } .doodle { width: clamp(70px, 22vw, 120px); } }
 
 /* Page banner (interior pages) */
 .page-hero {
@@ -565,14 +600,26 @@ p  { margin-bottom: 1rem; }
 /* Recipe / meal card */
 .recipe-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: .6rem; }
 
-/* Toast */
+/* Toast — inverts with the theme so text always contrasts the pill.
+   Hidden state is fully off-screen AND non-interactive; visibility flips to
+   hidden only after the slide-out finishes, so it never lingers on screen. */
 .toast {
-  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(120%);
-  background: var(--ink); color: #fff; padding: .9rem 1.5rem; border-radius: 999px;
-  box-shadow: var(--shadow-lg); z-index: 3000; font-weight: 600; transition: transform .4s var(--ease);
-  display: flex; gap: .5rem; align-items: center; max-width: 90vw;
+  position: fixed; bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(180%);
+  background: var(--ink); color: var(--bg);
+  padding: .9rem 1.4rem; border-radius: 999px;
+  box-shadow: var(--shadow-lg); z-index: 3000; font-weight: 700;
+  display: flex; gap: .55rem; align-items: center; max-width: 90vw;
+  visibility: hidden; pointer-events: none;
+  transition: transform .45s var(--ease), visibility 0s linear .45s;
 }
-.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  visibility: visible; pointer-events: auto;
+  transition: transform .45s var(--ease), visibility 0s;
+}
+.toast .ico { color: var(--green); font-size: 1.15rem; }
+[data-theme="dark"] .toast .ico { color: var(--green-dark); }
 
 /* 11. FOOTER =============================================================== */
 .site-footer { background: var(--ink); color: #cbd5e1; padding: 4rem 0 1.5rem; margin-top: 2rem; }
@@ -592,6 +639,16 @@ p  { margin-bottom: 1rem; }
 .footer-news input { flex: 1; padding: .7rem 1rem; border-radius: 10px; border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.06); color: #fff; }
 .footer-news input::placeholder { color: #94a3b8; }
 .footer-news button { padding: .7rem 1.1rem; border-radius: 10px; background: var(--green); color: #fff; font-weight: 600; }
+/* Newsletter form used on a coloured band (e.g. .cta-band). The band is always the
+   green gradient in both themes, so pin colours to fixed values (never theme vars). */
+.cta-band .footer-news input {
+  background: #ffffff; color: #0f172a;
+  border: 1px solid rgba(255,255,255,.9);
+}
+.cta-band .footer-news input::placeholder { color: #64748b; }
+.cta-band .footer-news input:focus { outline: none; box-shadow: 0 0 0 4px rgba(255,255,255,.35); }
+.cta-band .footer-news button { background: #0f172a; color: #ffffff; }
+.cta-band .footer-news button:hover { background: #1e293b; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); margin-top: 3rem; padding-top: 1.5rem;
   display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: .86rem; color: #94a3b8; }
 
@@ -605,15 +662,23 @@ p  { margin-bottom: 1rem; }
 .pill-row { display: flex; gap: .5rem; flex-wrap: wrap; }
 .divider { height:1px; background: var(--line); margin: 2rem 0; }
 .rounded-img { border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow:hidden; }
-.floaty { animation: floaty 6s ease-in-out infinite; }
+/* Gentle float — composited on the GPU so it never judders. Uses the `translate`
+   property (not `transform`) so it can coexist with a `transform`-based reveal. */
+.floaty { animation: floaty 6s ease-in-out infinite; will-change: translate; transform: translateZ(0); backface-visibility: hidden; }
 
-/* Reveal on scroll */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-.reveal.in { opacity: 1; transform: none; }
+/* Reveal on scroll — promoted to its own layer to avoid sub-pixel shimmer/shake */
+.reveal {
+  opacity: 0; transform: translate3d(0, 30px, 0);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+  will-change: opacity, transform; backface-visibility: hidden;
+}
+.reveal.in { opacity: 1; transform: translate3d(0, 0, 0); }
+/* Once revealed, drop the compositor hint so long pages stay light */
+.reveal.settled { will-change: auto; }
 
 @keyframes pop { from { transform: scale(.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-@keyframes floaty { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-14px);} }
+@keyframes floaty { 0%,100%{ translate: 0 0; } 50%{ translate: 0 -13px; } }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes pulse { 0%,100%{ transform: scale(1);} 50%{ transform: scale(1.06);} }
 

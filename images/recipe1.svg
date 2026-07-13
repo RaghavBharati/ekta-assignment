@@ -11,6 +11,6 @@
   <rect width="700" height="500" fill="url(#dots)"/>
   <circle cx="574" cy="100" r="83" fill="rgba(255,255,255,.08)"/>
   <circle cx="98" cy="430" r="62" fill="rgba(255,255,255,.07)"/>
-  <text x="50%" y="44%" font-size="100" text-anchor="middle" dominant-baseline="central">🥑</text>
-  <text x="50%" y="70%" font-size="31" fill="#ffffff" font-family="Poppins,Segoe UI,Arial" font-weight="700" letter-spacing="0.5" text-anchor="middle" opacity="0.95">Avocado Toast</text>
+  <g transform="translate(309.0 179.0) scale(3.417)" fill="none" stroke="#ffffff" color="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.96"><path d="M3.5 11h17a8.5 8.5 0 0 1-17 0Z"/><path d="M12 11c-1-2.5.5-5 3-6M12 11c0-2.5-2-4-4.5-4.5M12 11c1-2 3.5-2.5 5.5-1.5"/></g>
+  <text x="50%" y="70%" font-size="31" fill="#ffffff" font-family="Lora,Georgia,serif" font-weight="700" letter-spacing="0.5" text-anchor="middle" opacity="0.95">Avocado Toast</text>
 </svg>

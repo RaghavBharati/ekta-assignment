@@ -9,6 +9,6 @@
   </defs>
   <rect width="400" height="400" fill="url(#g)"/>
   <rect width="400" height="400" fill="url(#dots)"/>
-  <text x="50%" y="46%" font-size="100" text-anchor="middle" dominant-baseline="central">🧑‍🍳</text>
-  <text x="50%" y="74%" font-size="28" fill="#ffffff" font-family="Poppins,Segoe UI,Arial" font-weight="700" text-anchor="middle" opacity="0.95">Nutrition Lead</text>
+  <g transform="translate(159.0 143.0) scale(3.417)" fill="none" stroke="#ffffff" color="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.96"><circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></g>
+  <text x="50%" y="74%" font-size="28" fill="#ffffff" font-family="Lora,Georgia,serif" font-weight="700" text-anchor="middle" opacity="0.95">Nutrition Lead</text>
 </svg>

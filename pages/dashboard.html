@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Your personalised WellSphere wellness dashboard — track water, steps and mindfulness, earn points, build streaks and unlock badges. All saved privately on your device.">
-  <meta name="author" content="WellSphere Student Organization">
+  <meta name="author" content="WellSphere">
   <title>My Wellness Dashboard — WellSphere</title>
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -18,32 +18,32 @@
     <nav class="nav container" aria-label="Primary">
       <a class="brand" href="../index.html">
         <span class="logo">W</span>
-        <div><b>WellSphere</b><span>APU Health &amp; Wellness</span></div>
+        <div><b>WellSphere</b><span>Health &amp; Wellness</span></div>
       </a>
       <ul class="nav-menu">
         <li><a href="../index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li class="has-drop"><a href="#">Programs</a>
           <ul class="dropdown">
-            <li><a href="fitness.html"><span class="ic">🏃</span> Fitness &amp; Exercise</a></li>
-            <li><a href="mental-health.html"><span class="ic">🧘</span> Mental Wellness</a></li>
-            <li><a href="nutrition.html"><span class="ic">🥗</span> Nutrition &amp; Eating</a></li>
+            <li><a href="fitness.html"><span class="ic"><span class="ico" data-ico="run" aria-hidden="true"></span></span> Fitness &amp; Exercise</a></li>
+            <li><a href="mental-health.html"><span class="ic"><span class="ico" data-ico="meditation" aria-hidden="true"></span></span> Mental Wellness</a></li>
+            <li><a href="nutrition.html"><span class="ic"><span class="ico" data-ico="salad" aria-hidden="true"></span></span> Nutrition &amp; Eating</a></li>
           </ul>
         </li>
         <li><a href="events.html">Events</a></li>
         <li class="has-drop"><a href="#">Resources</a>
           <ul class="dropdown">
-            <li><a href="blog.html"><span class="ic">📝</span> Blog &amp; Articles</a></li>
-            <li><a href="resources.html"><span class="ic">📚</span> Wellness Resources</a></li>
-            <li><a href="gallery.html"><span class="ic">📷</span> Gallery</a></li>
-            <li><a href="faq.html"><span class="ic">❓</span> FAQ</a></li>
+            <li><a href="blog.html"><span class="ic"><span class="ico" data-ico="pencil" aria-hidden="true"></span></span> Blog &amp; Articles</a></li>
+            <li><a href="resources.html"><span class="ic"><span class="ico" data-ico="book" aria-hidden="true"></span></span> Wellness Resources</a></li>
+            <li><a href="gallery.html"><span class="ic"><span class="ico" data-ico="camera" aria-hidden="true"></span></span> Gallery</a></li>
+            <li><a href="faq.html"><span class="ic"><span class="ico" data-ico="help" aria-hidden="true"></span></span> FAQ</a></li>
           </ul>
         </li>
         <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="nav-actions">
-        <button class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+        <button class="theme-toggle" aria-label="Toggle dark mode"><span class="ico" data-ico="moon" aria-hidden="true"></span></button>
         <a class="btn btn-primary" href="membership.html">Join Us</a>
         <button class="nav-toggle" aria-label="Open menu"><span></span></button>
       </div>
@@ -82,13 +82,13 @@
           </div>
 
           <div class="widget text-center">
-            <span class="eyebrow">🏆 Rewards</span>
+            <span class="eyebrow"><span class="ico" data-ico="trophy" aria-hidden="true"></span> Rewards</span>
             <b id="dashPoints" style="display:block;font-size:2.6rem;line-height:1.1" class="mt-3">0</b>
             <small>Wellness Points</small>
           </div>
 
           <div class="widget text-center">
-            <span class="eyebrow">🔥 Consistency</span>
+            <span class="eyebrow"><span class="ico" data-ico="flame" aria-hidden="true"></span> Consistency</span>
             <b id="dashStreak" style="display:block;font-size:2.6rem;line-height:1.1" class="mt-3">0</b>
             <small>Day Streak</small>
             <p class="muted mt-3">Last quiz: <b id="dashQuiz">—</b></p>
@@ -102,27 +102,27 @@
         </div>
 
         <div class="widget reveal">
-          <h3>💧 Water</h3>
+          <h3><span class="ico" data-ico="water" aria-hidden="true"></span> Water</h3>
           <div class="goal-row">
-            <span class="g-ic">💧</span>
+            <span class="g-ic"><span class="ico" data-ico="water" aria-hidden="true"></span></span>
             <div class="g-meta"><b><span id="val-water">0</span> / 8 glasses</b>
               <div class="progress" id="meter-water"><span></span></div></div>
             <button class="counter-btn" data-inc="water" data-amt="-1" aria-label="decrease">−</button>
             <button class="counter-btn" data-inc="water" data-amt="1" aria-label="increase">+</button>
           </div>
 
-          <h3 class="mt-3">🚶 Steps</h3>
+          <h3 class="mt-3"><span class="ico" data-ico="walk" aria-hidden="true"></span> Steps</h3>
           <div class="goal-row">
-            <span class="g-ic">🚶</span>
+            <span class="g-ic"><span class="ico" data-ico="walk" aria-hidden="true"></span></span>
             <div class="g-meta"><b><span id="val-steps">0</span> / 8,000 steps</b>
               <div class="progress" id="meter-steps"><span></span></div></div>
             <button class="counter-btn" data-inc="steps" data-amt="-1000" aria-label="decrease">−</button>
             <button class="counter-btn" data-inc="steps" data-amt="1000" aria-label="increase">+</button>
           </div>
 
-          <h3 class="mt-3">🧘 Mindfulness</h3>
+          <h3 class="mt-3"><span class="ico" data-ico="meditation" aria-hidden="true"></span> Mindfulness</h3>
           <div class="goal-row">
-            <span class="g-ic">🧘</span>
+            <span class="g-ic"><span class="ico" data-ico="meditation" aria-hidden="true"></span></span>
             <div class="g-meta"><b><span id="val-mind">0</span> / 3 sessions</b>
               <div class="progress" id="meter-mind"><span></span></div></div>
             <button class="counter-btn" data-inc="mind" data-amt="-1" aria-label="decrease">−</button>
@@ -132,15 +132,15 @@
 
         <!-- PART 3 & PART 5 — Suggestions / reset + daily challenge -->
         <div class="grid grid-2 mt-3 reveal">
-          <div class="widget"><h3>💡 Today's Suggestions</h3>
+          <div class="widget"><h3><span class="ico" data-ico="bulb" aria-hidden="true"></span> Today's Suggestions</h3>
             <ul class="check-list" id="dashSuggestions"></ul>
-            <button class="btn btn-ghost mt-3" id="dashReset">🔄 Reset today's trackers</button>
+            <button class="btn btn-ghost mt-3" id="dashReset"><span class="ico" data-ico="refresh" aria-hidden="true"></span> Reset today's trackers</button>
           </div>
 
           <div class="challenge-card"><span class="badge" style="background:rgba(255,255,255,.25);color:#fff">Daily Challenge</span>
-            <div class="big" id="challengeBox" data-pts="20"><span id="challengeIcon">💧</span> <span id="challengeText">Drink 8 glasses of water today</span></div>
+            <div class="big" id="challengeBox" data-pts="20"><span id="challengeIcon"><span class="ico" data-ico="water" aria-hidden="true"></span></span> <span id="challengeText">Drink 8 glasses of water today</span></div>
             <p id="challengePts">+20 points</p>
-            <div class="center-btns" style="justify-content:flex-start"><button class="btn btn-ghost" id="challengeDone">✅ Done</button><button class="btn btn-outline" id="challengeNew">🎲 New</button></div>
+            <div class="center-btns" style="justify-content:flex-start"><button class="btn btn-ghost" id="challengeDone"><span class="ico" data-ico="check" aria-hidden="true"></span> Done</button><button class="btn btn-outline" id="challengeNew"><span class="ico" data-ico="shuffle" aria-hidden="true"></span> New</button></div>
           </div>
         </div>
 
@@ -151,12 +151,12 @@
         </div>
 
         <div class="badge-grid reveal">
-          <div class="trophy locked" id="badge-hydration"><span class="ic">💧</span><span class="t-name">Hydration Hero</span><span class="t-desc">Drink 8 glasses</span></div>
-          <div class="trophy locked" id="badge-fitness"><span class="ic">🚶</span><span class="t-name">Fitness Starter</span><span class="t-desc">Hit 5,000 steps</span></div>
-          <div class="trophy locked" id="badge-mind"><span class="ic">🧘</span><span class="t-name">Mindfulness Master</span><span class="t-desc">3 sessions</span></div>
-          <div class="trophy locked" id="badge-points100"><span class="ic">⭐</span><span class="t-name">Rising Star</span><span class="t-desc">Earn 100 points</span></div>
-          <div class="trophy locked" id="badge-points500"><span class="ic">🏅</span><span class="t-name">Wellness Legend</span><span class="t-desc">Earn 500 points</span></div>
-          <div class="trophy locked" id="badge-streak"><span class="ic">🔥</span><span class="t-name">Streak Keeper</span><span class="t-desc">7-day streak</span></div>
+          <div class="trophy locked" id="badge-hydration"><span class="ic"><span class="ico" data-ico="water" aria-hidden="true"></span></span><span class="t-name">Hydration Hero</span><span class="t-desc">Drink 8 glasses</span></div>
+          <div class="trophy locked" id="badge-fitness"><span class="ic"><span class="ico" data-ico="walk" aria-hidden="true"></span></span><span class="t-name">Fitness Starter</span><span class="t-desc">Hit 5,000 steps</span></div>
+          <div class="trophy locked" id="badge-mind"><span class="ic"><span class="ico" data-ico="meditation" aria-hidden="true"></span></span><span class="t-name">Mindfulness Master</span><span class="t-desc">3 sessions</span></div>
+          <div class="trophy locked" id="badge-points100"><span class="ic"><span class="ico" data-ico="star" aria-hidden="true"></span></span><span class="t-name">Rising Star</span><span class="t-desc">Earn 100 points</span></div>
+          <div class="trophy locked" id="badge-points500"><span class="ic"><span class="ico" data-ico="trophy" aria-hidden="true"></span></span><span class="t-name">Wellness Legend</span><span class="t-desc">Earn 500 points</span></div>
+          <div class="trophy locked" id="badge-streak"><span class="ic"><span class="ico" data-ico="flame" aria-hidden="true"></span></span><span class="t-name">Streak Keeper</span><span class="t-desc">7-day streak</span></div>
         </div>
 
         <p class="muted text-center mt-3 reveal">Want more points? Take the <a href="resources.html">wellness quiz</a> to boost your score, then find something to do at our <a href="events.html">upcoming events</a>.</p>
@@ -172,15 +172,15 @@
         <div class="footer-brand">
           <a class="brand" href="../index.html">
             <span class="logo">W</span>
-            <div><b>WellSphere</b><span>APU Health &amp; Wellness</span></div>
+            <div><b>WellSphere</b><span>Health &amp; Wellness</span></div>
           </a>
-          <p>Building healthier students, one habit at a time. A student-led wellness community at Asia Pacific University — open to everyone.</p>
+          <p>Building a healthier you, one habit at a time. A welcoming wellness community — open to everyone.</p>
           <div class="footer-social">
-            <a href="#" aria-label="Facebook">📘</a>
-            <a href="#" aria-label="Instagram">📸</a>
-            <a href="#" aria-label="Twitter / X">🐦</a>
-            <a href="#" aria-label="YouTube">▶️</a>
-            <a href="#" aria-label="LinkedIn">💼</a>
+            <a href="#" aria-label="Facebook"><span class="ico" data-ico="facebook" aria-hidden="true"></span></a>
+            <a href="#" aria-label="Instagram"><span class="ico" data-ico="instagram" aria-hidden="true"></span></a>
+            <a href="#" aria-label="Twitter / X"><span class="ico" data-ico="twitter" aria-hidden="true"></span></a>
+            <a href="#" aria-label="YouTube"><span class="ico" data-ico="youtube" aria-hidden="true"></span></a>
+            <a href="#" aria-label="LinkedIn"><span class="ico" data-ico="linkedin" aria-hidden="true"></span></a>
           </div>
         </div>
         <div>
@@ -210,12 +210,12 @@
             <input type="email" placeholder="Your email" aria-label="Email address" required>
             <button type="submit">Go</button>
           </form>
-          <p style="color:#94a3b8;font-size:.86rem;margin-top:1rem">✉️ hello@wellsphere.apu.edu<br>📍 APU Campus, Kuala Lumpur</p>
+          <p style="color:#94a3b8;font-size:.86rem;margin-top:1rem"><span class="ico" data-ico="mail" aria-hidden="true"></span> hello@wellsphere.com<br><span class="ico" data-ico="pin" aria-hidden="true"></span> Kuala Lumpur, Malaysia</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© <span data-year>2026</span> WellSphere Student Organization · Asia Pacific University</span>
-        <span>Made with 💚 for the FDD module · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a></span>
+        <span>© <span data-year>2026</span> WellSphere Health &amp; Wellness</span>
+        <span>Made with <span class="ico" data-ico="heart" aria-hidden="true"></span> for a healthier you &middot; <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a></span>
       </div>
     </div>
   </footer>

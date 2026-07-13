@@ -11,6 +11,6 @@
   <rect width="800" height="500" fill="url(#dots)"/>
   <circle cx="656" cy="100" r="83" fill="rgba(255,255,255,.08)"/>
   <circle cx="112" cy="430" r="62" fill="rgba(255,255,255,.07)"/>
-  <text x="50%" y="44%" font-size="100" text-anchor="middle" dominant-baseline="central">🧠</text>
-  <text x="50%" y="70%" font-size="31" fill="#ffffff" font-family="Poppins,Segoe UI,Arial" font-weight="700" letter-spacing="0.5" text-anchor="middle" opacity="0.95">Beat Exam Stress</text>
+  <g transform="translate(359.0 179.0) scale(3.417)" fill="none" stroke="#ffffff" color="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.96"><path d="M9.5 4.2A2.6 2.6 0 0 0 6.4 6.6 2.8 2.8 0 0 0 5 12a2.8 2.8 0 0 0 2 4.4A2.4 2.4 0 0 0 11.5 17V5.5A2.4 2.4 0 0 0 9.5 4.2Z"/><path d="M14.5 4.2A2.6 2.6 0 0 1 17.6 6.6 2.8 2.8 0 0 1 19 12a2.8 2.8 0 0 1-2 4.4A2.4 2.4 0 0 1 12.5 17"/></g>
+  <text x="50%" y="70%" font-size="31" fill="#ffffff" font-family="Lora,Georgia,serif" font-weight="700" letter-spacing="0.5" text-anchor="middle" opacity="0.95">Beat Stress</text>
 </svg>

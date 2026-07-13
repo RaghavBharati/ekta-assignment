@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Care for your mind at WellSphere APU — a stigma-free space for student mental wellness, an interactive mood check-in, stress management techniques, guided breathing, and free confidential counselling.">
-  <meta name="author" content="WellSphere Student Organization">
+  <meta name="description" content="Care for your mind at WellSphere — a stigma-free space for mental wellness, an interactive mood check-in, stress management techniques, guided breathing, and free confidential counselling.">
+  <meta name="author" content="WellSphere">
   <title>Mental Wellness — WellSphere</title>
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -18,32 +18,32 @@
     <nav class="nav container" aria-label="Primary">
       <a class="brand" href="../index.html">
         <span class="logo">W</span>
-        <div><b>WellSphere</b><span>APU Health &amp; Wellness</span></div>
+        <div><b>WellSphere</b><span>Health &amp; Wellness</span></div>
       </a>
       <ul class="nav-menu">
         <li><a href="../index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li class="has-drop"><a href="#">Programs</a>
           <ul class="dropdown">
-            <li><a href="fitness.html"><span class="ic">🏃</span> Fitness &amp; Exercise</a></li>
-            <li><a href="mental-health.html"><span class="ic">🧘</span> Mental Wellness</a></li>
-            <li><a href="nutrition.html"><span class="ic">🥗</span> Nutrition &amp; Eating</a></li>
+            <li><a href="fitness.html"><span class="ic"><span class="ico" data-ico="run" aria-hidden="true"></span></span> Fitness &amp; Exercise</a></li>
+            <li><a href="mental-health.html"><span class="ic"><span class="ico" data-ico="meditation" aria-hidden="true"></span></span> Mental Wellness</a></li>
+            <li><a href="nutrition.html"><span class="ic"><span class="ico" data-ico="salad" aria-hidden="true"></span></span> Nutrition &amp; Eating</a></li>
           </ul>
         </li>
         <li><a href="events.html">Events</a></li>
         <li class="has-drop"><a href="#">Resources</a>
           <ul class="dropdown">
-            <li><a href="blog.html"><span class="ic">📝</span> Blog &amp; Articles</a></li>
-            <li><a href="resources.html"><span class="ic">📚</span> Wellness Resources</a></li>
-            <li><a href="gallery.html"><span class="ic">📷</span> Gallery</a></li>
-            <li><a href="faq.html"><span class="ic">❓</span> FAQ</a></li>
+            <li><a href="blog.html"><span class="ic"><span class="ico" data-ico="pencil" aria-hidden="true"></span></span> Blog &amp; Articles</a></li>
+            <li><a href="resources.html"><span class="ic"><span class="ico" data-ico="book" aria-hidden="true"></span></span> Wellness Resources</a></li>
+            <li><a href="gallery.html"><span class="ic"><span class="ico" data-ico="camera" aria-hidden="true"></span></span> Gallery</a></li>
+            <li><a href="faq.html"><span class="ic"><span class="ico" data-ico="help" aria-hidden="true"></span></span> FAQ</a></li>
           </ul>
         </li>
         <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="nav-actions">
-        <button class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+        <button class="theme-toggle" aria-label="Toggle dark mode"><span class="ico" data-ico="moon" aria-hidden="true"></span></button>
         <a class="btn btn-primary" href="membership.html">Join Us</a>
         <button class="nav-toggle" aria-label="Open menu"><span></span></button>
       </div>
@@ -67,11 +67,11 @@
           <div>
             <span class="eyebrow">A stigma-free space</span>
             <h2 class="mt-2">Your mind deserves the same care as your body</h2>
-            <p class="lead">Student life can feel like a lot — deadlines, exams, being far from home, and the quiet pressure to have it all figured out. Struggling with your mental health does not make you weak, and it is far more common than it looks.</p>
-            <p>At WellSphere, mental wellness is a priority, not an afterthought. We believe there is no shame in feeling low, anxious, or overwhelmed — and no shame in asking for help. Whatever you are carrying today, you do not have to carry it alone. This is a judgement-free corner of campus where small, kind steps are always welcome.</p>
+            <p class="lead">Everyday life can feel like a lot — deadlines, pressures, being far from loved ones, and the quiet pressure to have it all figured out. Struggling with your mental health does not make you weak, and it is far more common than it looks.</p>
+            <p>At WellSphere, mental wellness is a priority, not an afterthought. We believe there is no shame in feeling low, anxious, or overwhelmed — and no shame in asking for help. Whatever you are carrying today, you do not have to carry it alone. This is a judgement-free space where small, kind steps are always welcome.</p>
             <a class="btn btn-primary" href="membership.html">Join a supportive community</a>
           </div>
-          <img class="rounded-img floaty" src="../images/mental.svg" alt="Illustration of a calm mind and self-care representing student mental wellness">
+          <img class="rounded-img floaty" src="../images/mental.svg" alt="Illustration of a calm mind and self-care representing mental wellness">
         </div>
       </div>
     </section>
@@ -89,10 +89,10 @@
           <h2 class="mt-2">How are you feeling right now?</h2>
           <p class="muted">Tap your mood to get instant, caring suggestions. Your check-ins stay private on your device.</p>
           <div class="mood-grid mt-3" id="moodGrid">
-            <button type="button" class="mood" data-mood="happy"><span class="emoji">😊</span><span class="name">Happy</span></button>
-            <button type="button" class="mood" data-mood="calm"><span class="emoji">😌</span><span class="name">Calm</span></button>
-            <button type="button" class="mood" data-mood="neutral"><span class="emoji">😐</span><span class="name">Neutral</span></button>
-            <button type="button" class="mood" data-mood="stressed"><span class="emoji">😔</span><span class="name">Stressed</span></button>
+            <button type="button" class="mood" data-mood="happy"><span class="emoji"><span class="ico" data-ico="mood-happy" aria-hidden="true"></span></span><span class="name">Happy</span></button>
+            <button type="button" class="mood" data-mood="calm"><span class="emoji"><span class="ico" data-ico="mood-calm" aria-hidden="true"></span></span><span class="name">Calm</span></button>
+            <button type="button" class="mood" data-mood="neutral"><span class="emoji"><span class="ico" data-ico="mood-neutral" aria-hidden="true"></span></span><span class="name">Neutral</span></button>
+            <button type="button" class="mood" data-mood="stressed"><span class="emoji"><span class="ico" data-ico="mood-sad" aria-hidden="true"></span></span><span class="name">Stressed</span></button>
           </div>
           <div class="result-box" id="moodResult"></div>
         </div>
@@ -109,32 +109,32 @@
         </div>
         <div class="grid grid-3 reveal">
           <article class="card">
-            <div class="card-ic">🗓️</div>
+            <div class="card-ic"><span class="ico" data-ico="calendar" aria-hidden="true"></span></div>
             <h3>Time management</h3>
             <p>Break big tasks into small, doable steps and tackle one at a time. A simple to-do list or a 25-minute focus timer turns an overwhelming week into calm, bite-sized wins.</p>
           </article>
           <article class="card">
-            <div class="card-ic">🌬️</div>
+            <div class="card-ic"><span class="ico" data-ico="breath" aria-hidden="true"></span></div>
             <h3>The 4-7-8 breath</h3>
             <p>Breathe in through your nose for 4 seconds, hold gently for 7, then exhale slowly through your mouth for 8. Repeat four times to slow a racing mind almost anywhere.</p>
           </article>
           <article class="card">
-            <div class="card-ic">🚶</div>
+            <div class="card-ic"><span class="ico" data-ico="walk" aria-hidden="true"></span></div>
             <h3>Movement breaks</h3>
-            <p>A short walk, a stretch, or a few star-jumps between study sessions clears mental fog and releases tension your body has been quietly holding onto.</p>
+            <p>A short walk, a stretch, or a few star-jumps between tasks clears mental fog and releases tension your body has been quietly holding onto.</p>
           </article>
           <article class="card">
-            <div class="card-ic">😴</div>
+            <div class="card-ic"><span class="ico" data-ico="sleep" aria-hidden="true"></span></div>
             <h3>Sleep hygiene</h3>
             <p>Aim for a steady sleep and wake time, dim the lights before bed, and give screens a rest an hour early. Rested minds handle stress far more kindly.</p>
           </article>
           <article class="card">
-            <div class="card-ic">💬</div>
+            <div class="card-ic"><span class="ico" data-ico="chat" aria-hidden="true"></span></div>
             <h3>Talking it out</h3>
             <p>Sharing a worry with a friend, mentor, or counsellor makes it lighter. Saying things aloud helps you untangle thoughts — and reminds you that you are not alone.</p>
           </article>
           <article class="card">
-            <div class="card-ic">📵</div>
+            <div class="card-ic"><span class="ico" data-ico="phone-off" aria-hidden="true"></span></div>
             <h3>Digital detox</h3>
             <p>Set gentle limits on doom-scrolling and notifications. Even a short, screen-free pause each day gives your attention room to breathe and reset.</p>
           </article>
@@ -148,7 +148,7 @@
         <div class="section-head reveal">
           <span class="eyebrow">Pause &amp; reset</span>
           <h2>Guided breathing &amp; relaxation</h2>
-          <p class="muted">Try these anywhere — before an exam, in bed, or whenever things feel like too much.</p>
+          <p class="muted">Try these anywhere — in a quiet moment, in bed, or whenever things feel like too much.</p>
         </div>
         <div class="grid grid-2 reveal">
           <div class="widget">
@@ -189,7 +189,7 @@
           <p class="muted">Short, gentle practices to help you slow down and reconnect. Tap a session to preview.</p>
         </div>
         <div class="grid grid-3 reveal">
-          <article class="card media-card" role="button" tabindex="0" onclick="window.wsToast &amp;&amp; wsToast('🧘 Guided audio coming soon!')">
+          <article class="card media-card" role="button" tabindex="0" onclick="window.wsToast &amp;&amp; wsToast('Guided audio coming soon!', 'meditation')">
             <img src="../images/meditation.svg" alt="Person meditating peacefully for a guided calm session">
             <div class="body">
               <span class="badge green">10 min</span>
@@ -197,7 +197,7 @@
               <p>A soothing guided meditation to settle a busy mind and ease into stillness.</p>
             </div>
           </article>
-          <article class="card media-card" role="button" tabindex="0" onclick="window.wsToast &amp;&amp; wsToast('🧘 Guided audio coming soon!')">
+          <article class="card media-card" role="button" tabindex="0" onclick="window.wsToast &amp;&amp; wsToast('Guided audio coming soon!', 'meditation')">
             <img src="../images/yoga.svg" alt="Gentle yoga stretch for mindful movement and relaxation">
             <div class="body">
               <span class="badge accent">15 min</span>
@@ -205,7 +205,7 @@
               <p>Slow, breath-led yoga stretches to release tension and reconnect with your body.</p>
             </div>
           </article>
-          <article class="card media-card" role="button" tabindex="0" onclick="window.wsToast &amp;&amp; wsToast('🧘 Guided audio coming soon!')">
+          <article class="card media-card" role="button" tabindex="0" onclick="window.wsToast &amp;&amp; wsToast('Guided audio coming soon!', 'meditation')">
             <img src="../images/mental.svg" alt="Illustration representing a restful body-scan sleep meditation">
             <div class="body">
               <span class="badge coral">8 min</span>
@@ -223,7 +223,7 @@
         <div class="cta-band reveal">
           <span class="eyebrow">You are never a burden</span>
           <h2>Reaching out is a sign of strength</h2>
-          <p>APU offers a <b>free &amp; confidential counselling service</b> for all students — a safe, private space to talk things through with someone who genuinely cares. If you or someone you know is in crisis or needs urgent help, please contact a local crisis line or emergency services straight away. You matter, and support is always here.</p>
+          <p>We can connect you with a <b>free &amp; confidential counselling line</b> open to everyone — a safe, private space to talk things through with someone who genuinely cares. If you or someone you know is in crisis or needs urgent help, please contact a local crisis line or emergency services straight away. You matter, and support is always here.</p>
           <div class="center-btns">
             <a class="btn btn-primary btn-lg" href="contact.html">Talk to someone today</a>
             <a class="btn btn-outline btn-lg" href="resources.html">Browse wellness resources</a>
@@ -240,15 +240,15 @@
         <div class="footer-brand">
           <a class="brand" href="../index.html">
             <span class="logo">W</span>
-            <div><b>WellSphere</b><span>APU Health &amp; Wellness</span></div>
+            <div><b>WellSphere</b><span>Health &amp; Wellness</span></div>
           </a>
-          <p>Building healthier students, one habit at a time. A student-led wellness community at Asia Pacific University — open to everyone.</p>
+          <p>Building a healthier you, one habit at a time. A welcoming wellness community — open to everyone.</p>
           <div class="footer-social">
-            <a href="#" aria-label="Facebook">📘</a>
-            <a href="#" aria-label="Instagram">📸</a>
-            <a href="#" aria-label="Twitter / X">🐦</a>
-            <a href="#" aria-label="YouTube">▶️</a>
-            <a href="#" aria-label="LinkedIn">💼</a>
+            <a href="#" aria-label="Facebook"><span class="ico" data-ico="facebook" aria-hidden="true"></span></a>
+            <a href="#" aria-label="Instagram"><span class="ico" data-ico="instagram" aria-hidden="true"></span></a>
+            <a href="#" aria-label="Twitter / X"><span class="ico" data-ico="twitter" aria-hidden="true"></span></a>
+            <a href="#" aria-label="YouTube"><span class="ico" data-ico="youtube" aria-hidden="true"></span></a>
+            <a href="#" aria-label="LinkedIn"><span class="ico" data-ico="linkedin" aria-hidden="true"></span></a>
           </div>
         </div>
         <div>
@@ -278,12 +278,12 @@
             <input type="email" placeholder="Your email" aria-label="Email address" required>
             <button type="submit">Go</button>
           </form>
-          <p style="color:#94a3b8;font-size:.86rem;margin-top:1rem">✉️ hello@wellsphere.apu.edu<br>📍 APU Campus, Kuala Lumpur</p>
+          <p style="color:#94a3b8;font-size:.86rem;margin-top:1rem"><span class="ico" data-ico="mail" aria-hidden="true"></span> hello@wellsphere.com<br><span class="ico" data-ico="pin" aria-hidden="true"></span> Kuala Lumpur, Malaysia</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© <span data-year>2026</span> WellSphere Student Organization · Asia Pacific University</span>
-        <span>Made with 💚 for the FDD module · <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a></span>
+        <span>© <span data-year>2026</span> WellSphere Health &amp; Wellness</span>
+        <span>Made with <span class="ico" data-ico="heart" aria-hidden="true"></span> for a healthier you &middot; <a href="faq.html">FAQ</a> · <a href="contact.html">Contact</a></span>
       </div>
     </div>
   </footer>

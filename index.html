@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="WellSphere — APU's student-led health & wellness community. Fitness, mental wellbeing, nutrition, events, and interactive tools to build healthier student habits.">
-  <meta name="author" content="WellSphere Student Organization">
-  <title>WellSphere — Student Health &amp; Wellness Community</title>
+  <meta name="description" content="WellSphere — a health & wellness community for everyone. Fitness, mental wellbeing, nutrition, events, and interactive tools to build healthier everyday habits.">
+  <meta name="author" content="WellSphere">
+  <title>WellSphere — Health &amp; Wellness Community for Everyone</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -19,32 +19,32 @@
     <nav class="nav container" aria-label="Primary">
       <a class="brand" href="index.html">
         <span class="logo">W</span>
-        <div><b>WellSphere</b><span>APU Health &amp; Wellness</span></div>
+        <div><b>WellSphere</b><span>Health &amp; Wellness</span></div>
       </a>
       <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
         <li><a href="pages/about.html">About</a></li>
         <li class="has-drop"><a href="#">Programs</a>
           <ul class="dropdown">
-            <li><a href="pages/fitness.html"><span class="ic">🏃</span> Fitness &amp; Exercise</a></li>
-            <li><a href="pages/mental-health.html"><span class="ic">🧘</span> Mental Wellness</a></li>
-            <li><a href="pages/nutrition.html"><span class="ic">🥗</span> Nutrition &amp; Eating</a></li>
+            <li><a href="pages/fitness.html"><span class="ic"><span class="ico" data-ico="run" aria-hidden="true"></span></span> Fitness &amp; Exercise</a></li>
+            <li><a href="pages/mental-health.html"><span class="ic"><span class="ico" data-ico="meditation" aria-hidden="true"></span></span> Mental Wellness</a></li>
+            <li><a href="pages/nutrition.html"><span class="ic"><span class="ico" data-ico="salad" aria-hidden="true"></span></span> Nutrition &amp; Eating</a></li>
           </ul>
         </li>
         <li><a href="pages/events.html">Events</a></li>
         <li class="has-drop"><a href="#">Resources</a>
           <ul class="dropdown">
-            <li><a href="pages/blog.html"><span class="ic">📝</span> Blog &amp; Articles</a></li>
-            <li><a href="pages/resources.html"><span class="ic">📚</span> Wellness Resources</a></li>
-            <li><a href="pages/gallery.html"><span class="ic">📷</span> Gallery</a></li>
-            <li><a href="pages/faq.html"><span class="ic">❓</span> FAQ</a></li>
+            <li><a href="pages/blog.html"><span class="ic"><span class="ico" data-ico="pencil" aria-hidden="true"></span></span> Blog &amp; Articles</a></li>
+            <li><a href="pages/resources.html"><span class="ic"><span class="ico" data-ico="book" aria-hidden="true"></span></span> Wellness Resources</a></li>
+            <li><a href="pages/gallery.html"><span class="ic"><span class="ico" data-ico="camera" aria-hidden="true"></span></span> Gallery</a></li>
+            <li><a href="pages/faq.html"><span class="ic"><span class="ico" data-ico="help" aria-hidden="true"></span></span> FAQ</a></li>
           </ul>
         </li>
         <li><a href="pages/dashboard.html">Dashboard</a></li>
         <li><a href="pages/contact.html">Contact</a></li>
       </ul>
       <div class="nav-actions">
-        <button class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+        <button class="theme-toggle" aria-label="Toggle dark mode"><span class="ico" data-ico="moon" aria-hidden="true"></span></button>
         <a class="btn btn-primary" href="pages/membership.html">Join Us</a>
         <button class="nav-toggle" aria-label="Open menu"><span></span></button>
       </div>
@@ -54,13 +54,39 @@
   <main>
     <!-- ================= HERO ================= -->
     <section class="hero">
-      <div class="hero-media">
-        <img src="images/hero-home.svg" alt="Students living a healthy, balanced lifestyle">
+      <div class="hero-doodles" aria-hidden="true">
+        <!-- corner doodles only — the centre stays clear so the text is the focus -->
+        <div class="doodle d-tl" data-parallax="0.12">
+          <svg viewBox="0 0 130 130" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 110C20 60 45 30 105 24"/>
+            <path d="M105 24c-2 16-12 26-30 28M60 52c-16 2-24 12-24 28M84 30c-14 0-22 8-24 22M40 84c-12 2-18 10-18 24"/>
+            <circle cx="105" cy="24" r="5"/>
+          </svg>
+        </div>
+        <div class="doodle d-tr" data-parallax="-0.10">
+          <svg viewBox="0 0 130 130" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="70" cy="58" r="20"/>
+            <path d="M70 22v-10M70 104v-10M106 58h10M24 58h10M96 32l7-7M37 86l-7 7M96 84l7 7M37 30l-7-7"/>
+          </svg>
+        </div>
+        <div class="doodle d-bl" data-parallax="-0.16">
+          <svg viewBox="0 0 130 130" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M46 24c14 16 22 30 22 42a22 22 0 0 1-44 0c0-12 8-26 22-42Z"/>
+            <path d="M96 66c8 9 12 17 12 24a12 12 0 0 1-24 0c0-7 4-15 12-24Z"/>
+            <path d="M40 58c-4 3-6 7-6 12"/>
+          </svg>
+        </div>
+        <div class="doodle d-br" data-parallax="0.14">
+          <svg viewBox="0 0 130 130" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 70h18l10-26 16 52 12-34 8 16h30"/>
+            <path d="M30 96v14M40 96v14M90 96v14M100 96v14M35 103h70"/>
+          </svg>
+        </div>
       </div>
       <div class="container hero-inner">
-        <span class="eyebrow">🌿 APU Student Wellness Community</span>
-        <h1>Building Healthier Students,<br>One Habit at a Time</h1>
-        <p>Join WellSphere — a student-powered wellness movement blending fitness, mental wellbeing, and nutrition into everyday campus life. Track habits, join events, and grow together.</p>
+        <span class="eyebrow"><span class="ico" data-ico="leaf" aria-hidden="true"></span> Health &amp; Wellness for Everyone</span>
+        <h1>Building a Healthier You,<br>One Habit at a Time</h1>
+        <p>Welcome to WellSphere — a wellness community blending fitness, mental wellbeing, and nutrition into everyday life. Track your habits, join events, and grow together.</p>
         <div class="hero-cta">
           <a class="btn btn-accent btn-lg" href="pages/membership.html">Become a Member →</a>
           <a class="btn btn-outline btn-lg" href="pages/dashboard.html">Try the Dashboard</a>
@@ -78,19 +104,19 @@
       <div class="container">
         <div class="grid grid-4">
           <a class="card reveal" href="pages/fitness.html">
-            <div class="card-ic">🏃</div><h4>Fitness Planner</h4>
+            <div class="card-ic"><span class="ico" data-ico="run" aria-hidden="true"></span></div><h4>Fitness Planner</h4>
             <p>Generate a workout in seconds.</p>
           </a>
           <a class="card reveal" href="pages/mental-health.html">
-            <div class="card-ic">🧘</div><h4>Mood Tracker</h4>
+            <div class="card-ic"><span class="ico" data-ico="meditation" aria-hidden="true"></span></div><h4>Mood Tracker</h4>
             <p>Check in & get support.</p>
           </a>
           <a class="card reveal" href="pages/dashboard.html">
-            <div class="card-ic">📊</div><h4>Wellness Score</h4>
+            <div class="card-ic"><span class="ico" data-ico="chart" aria-hidden="true"></span></div><h4>Wellness Score</h4>
             <p>Track your daily habits.</p>
           </a>
           <a class="card reveal" href="pages/events.html">
-            <div class="card-ic">📅</div><h4>Join an Event</h4>
+            <div class="card-ic"><span class="ico" data-ico="calendar" aria-hidden="true"></span></div><h4>Join an Event</h4>
             <p>Yoga, workshops & more.</p>
           </a>
         </div>
@@ -102,13 +128,13 @@
       <div class="container split">
         <div class="reveal">
           <span class="eyebrow">Who we are</span>
-          <h2>Wellness that fits the <span class="gradient-text">student life</span></h2>
-          <p class="lead">WellSphere is a student-led organization at Asia Pacific University (APU) on a mission to make healthy living simple, social, and stigma-free.</p>
-          <p>Between deadlines, part-time jobs, and late-night study sessions, wellbeing is often the first thing students drop. We're here to change that — with practical tools, welcoming events, and a community that has your back. Everything we build is free and open to students everywhere.</p>
+          <h2>Wellness that fits <span class="gradient-text">everyday life</span></h2>
+          <p class="lead">WellSphere is a caring community on a mission to make healthy living simple, social, and stigma-free.</p>
+          <p>Between work, family, and everything else, wellbeing is often the first thing people drop. We're here to change that — with practical tools, welcoming events, and a community that has your back. Everything we build is free and open to everyone.</p>
           <ul class="check-list mt-3">
-            <li>Evidence-based tips designed for busy students</li>
+            <li>Evidence-based tips designed for busy lives</li>
             <li>Judgement-free mental health support &amp; resources</li>
-            <li>Fun events that actually fit your timetable</li>
+            <li>Fun events that actually fit your schedule</li>
           </ul>
           <a class="btn btn-primary mt-4" href="pages/about.html">More about us →</a>
         </div>
@@ -132,7 +158,7 @@
             <div class="body">
               <span class="badge green">Move</span>
               <h3 class="mt-2">Fitness &amp; Exercise</h3>
-              <p>Beginner-friendly routines, dorm workouts, and a smart planner that builds a session around your goal and free time.</p>
+              <p>Beginner-friendly routines, at-home workouts, and a smart planner that builds a session around your goal and free time.</p>
               <a class="card-link" href="pages/fitness.html">Explore fitness →</a>
             </div>
           </article>
@@ -150,7 +176,7 @@
             <div class="body">
               <span class="badge accent">Nourish</span>
               <h3 class="mt-2">Nutrition &amp; Eating</h3>
-              <p>Balanced-plate guides, budget student recipes, and quick meal ideas that don't need a full kitchen.</p>
+              <p>Balanced-plate guides, budget-friendly recipes, and quick meal ideas that don't need a full kitchen.</p>
               <a class="card-link" href="pages/nutrition.html">Explore nutrition →</a>
             </div>
           </article>
@@ -163,22 +189,22 @@
       <div class="container grid grid-2" style="align-items:stretch">
         <div class="challenge-card reveal" id="challengeBox" data-pts="20">
           <span class="badge" style="background:rgba(255,255,255,.25);color:#fff">Daily Wellness Challenge</span>
-          <div class="big"><span id="challengeIcon">💧</span> <span id="challengeText">Drink 8 glasses of water today</span></div>
+          <div class="big"><span id="challengeIcon"><span class="ico" data-ico="water" aria-hidden="true"></span></span> <span id="challengeText">Drink 8 glasses of water today</span></div>
           <p id="challengePts" style="font-weight:600">+20 points</p>
           <div class="center-btns" style="justify-content:flex-start">
-            <button class="btn btn-ghost" id="challengeDone">✅ I did it!</button>
-            <button class="btn btn-outline" id="challengeNew">🎲 New challenge</button>
+            <button class="btn btn-ghost" id="challengeDone"><span class="ico" data-ico="check" aria-hidden="true"></span> I did it!</button>
+            <button class="btn btn-outline" id="challengeNew"><span class="ico" data-ico="shuffle" aria-hidden="true"></span> New challenge</button>
           </div>
         </div>
         <div class="widget reveal">
           <span class="eyebrow">2-minute check</span>
-          <h3 class="mt-2">How healthy is your student lifestyle?</h3>
+          <h3 class="mt-2">How healthy is your everyday lifestyle?</h3>
           <p class="muted">Answer a few quick questions about sleep, exercise, nutrition and stress to get your personal wellness score and tips.</p>
           <div class="grid grid-4 mt-3">
-            <div class="text-center"><div style="font-size:1.8rem">😴</div><small>Sleep</small></div>
-            <div class="text-center"><div style="font-size:1.8rem">🏃</div><small>Exercise</small></div>
-            <div class="text-center"><div style="font-size:1.8rem">🥗</div><small>Nutrition</small></div>
-            <div class="text-center"><div style="font-size:1.8rem">🧘</div><small>Stress</small></div>
+            <div class="text-center"><div style="font-size:1.8rem"><span class="ico" data-ico="sleep" aria-hidden="true"></span></div><small>Sleep</small></div>
+            <div class="text-center"><div style="font-size:1.8rem"><span class="ico" data-ico="run" aria-hidden="true"></span></div><small>Exercise</small></div>
+            <div class="text-center"><div style="font-size:1.8rem"><span class="ico" data-ico="salad" aria-hidden="true"></span></div><small>Nutrition</small></div>
+            <div class="text-center"><div style="font-size:1.8rem"><span class="ico" data-ico="meditation" aria-hidden="true"></span></div><small>Stress</small></div>
           </div>
           <a class="btn btn-primary btn-block mt-4" href="pages/resources.html#quiz">Take the wellness quiz →</a>
         </div>
@@ -212,20 +238,20 @@
         <div class="grid grid-3">
           <article class="card media-card reveal">
             <img src="images/yoga.svg" alt="Morning yoga session">
-            <div class="body"><span class="badge">🧘 Fitness</span><h3 class="mt-2">Morning Yoga Sessions</h3>
-              <p class="muted">Every weekday · 7:00 AM · APU Courtyard</p>
+            <div class="body"><span class="badge"><span class="ico" data-ico="meditation" aria-hidden="true"></span> Fitness</span><h3 class="mt-2">Morning Yoga Sessions</h3>
+              <p class="muted">Every weekday · 7:00 AM · Riverside Park</p>
               <a class="card-link" href="pages/events.html">View &amp; register →</a></div>
           </article>
           <article class="card media-card reveal">
             <img src="images/workshop.svg" alt="Healthy cooking workshop">
-            <div class="body"><span class="badge accent">🍳 Nutrition</span><h3 class="mt-2">Healthy Cooking Workshop</h3>
-              <p class="muted">Sat · 2:00 PM · Student Kitchen</p>
+            <div class="body"><span class="badge accent"><span class="ico" data-ico="cooking" aria-hidden="true"></span> Nutrition</span><h3 class="mt-2">Healthy Cooking Workshop</h3>
+              <p class="muted">Sat · 2:00 PM · Community Kitchen</p>
               <a class="card-link" href="pages/events.html">View &amp; register →</a></div>
           </article>
           <article class="card media-card reveal">
             <img src="images/meditation.svg" alt="Mental health awareness campaign">
-            <div class="body"><span class="badge coral">🧠 Mind</span><h3 class="mt-2">Mental Health Awareness Week</h3>
-              <p class="muted">Next month · Campus-wide</p>
+            <div class="body"><span class="badge coral"><span class="ico" data-ico="brain" aria-hidden="true"></span> Mind</span><h3 class="mt-2">Mental Health Awareness Week</h3>
+              <p class="muted">Next month · Community-wide</p>
               <a class="card-link" href="pages/events.html">View &amp; register →</a></div>
           </article>
         </div>
@@ -248,26 +274,26 @@
     <section class="section tint">
       <div class="container">
         <div class="section-head reveal">
-          <span class="eyebrow">Student stories</span>
+          <span class="eyebrow">Community stories</span>
           <h2>Loved by the community</h2>
         </div>
         <div class="carousel reveal" data-carousel>
           <div class="carousel-track">
             <div class="slide"><div class="testimonial">
-              <p class="quote">"WellSphere's mood tracker helped me realise how much exam stress was affecting me. The breathing exercises are now part of my daily routine."</p>
-              <div class="who"><img class="avatar" src="images/avatar1.svg" alt=""><div><b>Aisha R.</b><br><small class="muted">Computer Science, Year 2</small></div></div>
+              <p class="quote">"WellSphere's mood tracker helped me realise how much everyday stress was affecting me. The breathing exercises are now part of my daily routine."</p>
+              <div class="who"><img class="avatar" src="images/avatar1.svg" alt=""><div><b>Aisha R.</b><br><small class="muted">Member since 2023</small></div></div>
             </div></div>
             <div class="slide"><div class="testimonial">
               <p class="quote">"I never worked out before joining. The beginner planner made it un-intimidating and now I actually look forward to my morning routine."</p>
-              <div class="who"><img class="avatar" src="images/avatar2.svg" alt=""><div><b>Daniel T.</b><br><small class="muted">Business, Year 3</small></div></div>
+              <div class="who"><img class="avatar" src="images/avatar2.svg" alt=""><div><b>Daniel T.</b><br><small class="muted">Member since 2022</small></div></div>
             </div></div>
             <div class="slide"><div class="testimonial">
-              <p class="quote">"The cooking workshops taught me to eat well on a student budget. My grocery bill went down and my energy went up!"</p>
-              <div class="who"><img class="avatar" src="images/avatar3.svg" alt=""><div><b>Mei Ling</b><br><small class="muted">Engineering, Year 1</small></div></div>
+              <p class="quote">"The cooking workshops taught me to eat well on a tight budget. My grocery bill went down and my energy went up!"</p>
+              <div class="who"><img class="avatar" src="images/avatar3.svg" alt=""><div><b>Mei Ling</b><br><small class="muted">New member</small></div></div>
             </div></div>
             <div class="slide"><div class="testimonial">
-              <p class="quote">"Best community on campus. It's welcoming, motivating, and the dashboard keeps me accountable every single day."</p>
-              <div class="who"><img class="avatar" src="images/avatar4.svg" alt=""><div><b>Omar K.</b><br><small class="muted">Design, Year 2</small></div></div>
+              <p class="quote">"Best wellness community I've found. It's welcoming, motivating, and the dashboard keeps me accountable every single day."</p>
+              <div class="who"><img class="avatar" src="images/avatar4.svg" alt=""><div><b>Omar K.</b><br><small class="muted">Member since 2024</small></div></div>
             </div></div>
           </div>
           <div class="dots"></div>
@@ -284,8 +310,8 @@
       <div class="container">
         <div class="cta-band reveal">
           <span class="eyebrow" style="background:rgba(255,255,255,.2);color:#fff">Ready to start?</span>
-          <h2 class="mt-2">Your healthiest semester begins today</h2>
-          <p>Join 1,200+ students building better habits together. Membership is free — all you bring is the motivation.</p>
+          <h2 class="mt-2">Your healthiest chapter begins today</h2>
+          <p>Join 1,200+ people building better habits together. Membership is free — all you bring is the motivation.</p>
           <div class="center-btns">
             <a class="btn btn-accent btn-lg" href="pages/membership.html">Join WellSphere</a>
             <a class="btn btn-outline btn-lg" href="pages/about.html">Learn more</a>
@@ -302,15 +328,15 @@
         <div class="footer-brand">
           <a class="brand" href="index.html">
             <span class="logo">W</span>
-            <div><b>WellSphere</b><span>APU Health &amp; Wellness</span></div>
+            <div><b>WellSphere</b><span>Health &amp; Wellness</span></div>
           </a>
-          <p>Building healthier students, one habit at a time. A student-led wellness community at Asia Pacific University — open to everyone.</p>
+          <p>Building a healthier you, one habit at a time. A welcoming wellness community — open to everyone.</p>
           <div class="footer-social">
-            <a href="#" aria-label="Facebook">📘</a>
-            <a href="#" aria-label="Instagram">📸</a>
-            <a href="#" aria-label="Twitter / X">🐦</a>
-            <a href="#" aria-label="YouTube">▶️</a>
-            <a href="#" aria-label="LinkedIn">💼</a>
+            <a href="#" aria-label="Facebook"><span class="ico" data-ico="facebook" aria-hidden="true"></span></a>
+            <a href="#" aria-label="Instagram"><span class="ico" data-ico="instagram" aria-hidden="true"></span></a>
+            <a href="#" aria-label="Twitter / X"><span class="ico" data-ico="twitter" aria-hidden="true"></span></a>
+            <a href="#" aria-label="YouTube"><span class="ico" data-ico="youtube" aria-hidden="true"></span></a>
+            <a href="#" aria-label="LinkedIn"><span class="ico" data-ico="linkedin" aria-hidden="true"></span></a>
           </div>
         </div>
         <div>
@@ -340,12 +366,12 @@
             <input type="email" placeholder="Your email" aria-label="Email address" required>
             <button type="submit">Go</button>
           </form>
-          <p style="color:#94a3b8;font-size:.86rem;margin-top:1rem">✉️ hello@wellsphere.apu.edu<br>📍 APU Campus, Kuala Lumpur</p>
+          <p style="color:#94a3b8;font-size:.86rem;margin-top:1rem"><span class="ico" data-ico="mail" aria-hidden="true"></span> hello@wellsphere.com<br><span class="ico" data-ico="pin" aria-hidden="true"></span> Kuala Lumpur, Malaysia</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© <span data-year>2026</span> WellSphere Student Organization · Asia Pacific University</span>
-        <span>Made with 💚 for the FDD module · <a href="pages/faq.html">FAQ</a> · <a href="pages/contact.html">Contact</a></span>
+        <span>© <span data-year>2026</span> WellSphere Health &amp; Wellness</span>
+        <span>Made with <span class="ico" data-ico="heart" aria-hidden="true"></span> for a healthier you &middot; <a href="pages/faq.html">FAQ</a> · <a href="pages/contact.html">Contact</a></span>
       </div>
     </div>
   </footer>

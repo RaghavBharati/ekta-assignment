@@ -30,15 +30,95 @@
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
   };
 
+  /* 0. SVG ICON SYSTEM ----------------------------------------------------- */
+  /* Clean, single-weight line icons drawn with currentColor so they inherit
+     text colour and scale with font-size. Replaces all decorative emoji. */
+  const ICON_PATHS = {
+    run: '<circle cx="14" cy="5" r="1.9" fill="currentColor" stroke="none"/><path d="M12.5 8.5 9 11l-3.5.5M12.5 8.5l3 2 3 .5M12.5 8.5 11 14l3 2 .5 4M11 14l-3.5 1L6 20"/>',
+    meditation: '<circle cx="12" cy="5.5" r="2"/><path d="M12 8.5c2 1.5 3 3.5 3 6M12 8.5c-2 1.5-3 3.5-3 6M4 18c2.5-2 5-3 8-3s5.5 1 8 3M6 16.5l6-1.5 6 1.5"/>',
+    salad: '<path d="M3.5 11h17a8.5 8.5 0 0 1-17 0Z"/><path d="M12 11c-1-2.5.5-5 3-6M12 11c0-2.5-2-4-4.5-4.5M12 11c1-2 3.5-2.5 5.5-1.5"/>',
+    book: '<path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5Z"/><path d="M12 6.5v13"/>',
+    pencil: '<path d="M4 20l1.2-4.2L15.5 5.5l3 3L8.2 18.8 4 20Z"/><path d="M13.5 7.5l3 3"/>',
+    camera: '<rect x="3" y="7" width="18" height="13" rx="2.5"/><circle cx="12" cy="13.5" r="3.4"/><path d="M8.5 7 10 4.5h4L15.5 7"/>',
+    instagram: '<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.1" fill="currentColor" stroke="none"/>',
+    twitter: '<path d="M4.5 4h3.3l4 5.4L16.6 4H20l-6 7.2L20.5 20h-3.3l-4.4-6L7.6 20H4l6.4-7.7Z" fill="currentColor" stroke="none"/>',
+    facebook: '<path d="M14 8.5V7c0-.8.4-1.1 1.1-1.1H16.6V3H14C11.9 3 10.5 4.4 10.5 6.6V8.5H8.5v3h2V21H14v-9.5h2.2l.4-3Z" fill="currentColor" stroke="none"/>',
+    linkedin: '<rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M7.5 10.5V16.5M7.5 7.6v.01M11.2 16.5v-3.3c0-1.9 3.3-2.1 3.3.2v3.1"/><circle cx="7.5" cy="7.6" r="0.5" fill="currentColor" stroke="none"/>',
+    youtube: '<rect x="3" y="6" width="18" height="12" rx="3.5"/><path d="M10.5 9.5l4.5 2.5-4.5 2.5Z" fill="currentColor" stroke="none"/>',
+    heart: '<path d="M12 20.5S3.5 15 3.5 8.8A4.3 4.3 0 0 1 12 6a4.3 4.3 0 0 1 8.5 2.8C20.5 15 12 20.5 12 20.5Z" fill="currentColor" stroke="none"/>',
+    help: '<circle cx="12" cy="12" r="9"/><path d="M9.3 9.4a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2-2.7 3.6"/><circle cx="12" cy="17" r="0.7" fill="currentColor" stroke="none"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/>',
+    moon: '<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z"/>',
+    mail: '<rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M4 7l8 6 8-6"/>',
+    celebrate: '<path d="M4 20l4.8-12.5 7.7 7.7L4 20Z"/><path d="M4 20l7.3-2.2M8.8 7.5l7.7 7.7"/><path d="M15 4v2.4M18.5 7.5H21M16.8 10.6 18.5 9"/>',
+    calendar: '<rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M8 3.5v3M16 3.5v3"/>',
+    water: '<path d="M12 3.2s6 6.3 6 10.3A6 6 0 1 1 6 13.5C6 9.5 12 3.2 12 3.2Z" fill="currentColor" stroke="none"/>',
+    walk: '<circle cx="13" cy="4.5" r="1.8" fill="currentColor" stroke="none"/><path d="M13 7.5l-1.5 4 2 2 1.5 5M11.5 11.5l-3 1.5-1 3M13.5 13.5l2.5 1.5"/>',
+    leaf: '<path d="M4.5 19.5c0-8 6-13.5 15.5-14.5.5 10-5.5 15.5-15.5 14.5Z"/><path d="M5 19C9 14 12.5 11 17 9"/>',
+    flame: '<path d="M12 2.5C9.5 5.5 7 8 7 12a5 5 0 0 0 10 0c0-2-1-3.6-2.2-5-.6 1.4-1.8 1.6-1.8-.2 0-1.6-.4-3-1-4.3Z"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 2"/>',
+    download: '<path d="M12 3v11M8 10.5l4 4 4-4M4.5 19.5h15"/>',
+    check: '<path d="M20 6.5 9.5 17.5 4 12"/>',
+    sleep: '<path d="M19.5 13.8A7.2 7.2 0 0 1 10.2 4.5 7.2 7.2 0 1 0 19.5 13.8Z"/><path d="M14.5 4h4l-4 4.2h4"/>',
+    warning: '<path d="M12 3.5l9.2 16H2.8L12 3.5Z"/><path d="M12 10v4.2M12 17.6v.01"/>',
+    dumbbell: '<path d="M4 9v6M6.5 8v8M17.5 8v8M20 9v6M6.5 12h11"/>',
+    bolt: '<path d="M13 2L4 14h6l-1 8 9-12h-6l1-8Z" fill="currentColor" stroke="none"/>',
+    star: '<path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z" fill="currentColor" stroke="none"/>',
+    video: '<rect x="3" y="6" width="12.5" height="12" rx="2"/><path d="M15.5 10l5.5-3v10l-5.5-3z"/>',
+    money: '<circle cx="12" cy="12" r="9"/><path d="M12 6.8v10.4M14.6 9.2C13.9 8.4 13 8 12 8c-1.5 0-2.6.9-2.6 2s1 1.8 2.6 2 2.6.9 2.6 2-1.1 2-2.6 2c-1 0-1.9-.4-2.6-1.2"/>',
+    chart: '<path d="M4 20V4M4 20h16M8 20v-6M12 20v-9M16 20v-4"/>',
+    shuffle: '<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.1" fill="currentColor" stroke="none"/><circle cx="15" cy="9" r="1.1" fill="currentColor" stroke="none"/><circle cx="9" cy="15" r="1.1" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="1.1" fill="currentColor" stroke="none"/>',
+    cooking: '<circle cx="11" cy="13" r="6"/><path d="M17 13h4.5"/>',
+    "mood-happy": '<circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="0.9" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="0.9" fill="currentColor" stroke="none"/><path d="M8 14a4 4 0 0 0 8 0"/>',
+    "mood-calm": '<circle cx="12" cy="12" r="9"/><path d="M7.8 10.2c.7-.6 1.7-.6 2.4 0M13.8 10.2c.7-.6 1.7-.6 2.4 0M8.5 14.5c1.6 1 5.4 1 7 0"/>',
+    "mood-neutral": '<circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="0.9" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="0.9" fill="currentColor" stroke="none"/><path d="M9 15h6"/>',
+    "mood-sad": '<circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="0.9" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="0.9" fill="currentColor" stroke="none"/><path d="M8 15.5a4 4 0 0 1 8 0"/>',
+    "phone-off": '<path d="M6 3.5h3.5L11 7.5 9 8.8a11 11 0 0 0 5 5l1.3-2 4 1.5v3.7c0 1-.9 1.8-1.9 1.7C11 20 4 12.9 3.3 5.4 3.2 4.4 4 3.5 5 3.5Z"/><path d="M3 3l18 18"/>',
+    phone: '<path d="M6 3.5h3.5L11 7.5 9 8.8a11 11 0 0 0 5 5l1.3-2 4 1.5v3.7c0 1-.9 1.8-1.9 1.7C11 20 4 12.9 3.3 5.4 3.2 4.4 4 3.5 5 3.5Z"/>',
+    trophy: '<path d="M8 4h8v4.5a4 4 0 0 1-8 0V4Z"/><path d="M8 5H5v1.8a3 3 0 0 0 3 3M16 5h3v1.8a3 3 0 0 1-3 3M10 15.5h4M8.5 20h7M12 15.5v-2.5"/>',
+    refresh: '<path d="M20 11a8 8 0 0 0-13.7-4.5L4 9M4 9V4M4 9h5M4 13a8 8 0 0 0 13.7 4.5L20 15M20 15v5M20 15h-5"/>',
+    balance: '<path d="M12 3.5v16M6 20h12M6 6l12-1.5M6 6l-3 6a3 3 0 0 0 6 0L6 6ZM18 4.5l-3 6a3 3 0 0 0 6 0l-3-6Z"/>',
+    handshake: '<path d="M12 6.5 9.5 5 3 8.5v6l3 1M12 6.5l2.5-1.5L21 8.5v6l-3 1M6 15.5l3 2.5 2-1.8 2.5 2 2.5-2.2M9 12l2 2"/>',
+    chat: '<path d="M4 5.5h16v10H9.5L5 19v-3.5H4V5.5Z"/><path d="M8 10h8M8 12.5h5"/>',
+    brain: '<path d="M9.5 4.2A2.6 2.6 0 0 0 6.4 6.6 2.8 2.8 0 0 0 5 12a2.8 2.8 0 0 0 2 4.4A2.4 2.4 0 0 0 11.5 17V5.5A2.4 2.4 0 0 0 9.5 4.2Z"/><path d="M14.5 4.2A2.6 2.6 0 0 1 17.6 6.6 2.8 2.8 0 0 1 19 12a2.8 2.8 0 0 1-2 4.4A2.4 2.4 0 0 1 12.5 17"/>',
+    compass: '<circle cx="12" cy="12" r="9"/><path d="M15.6 8.4 13 13l-4.6 2.6L11 11l4.6-2.6Z" fill="currentColor" stroke="none"/>',
+    target: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="0.9" fill="currentColor" stroke="none"/>',
+    vision: '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/>',
+    sparkle: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z" fill="currentColor" stroke="none"/><path d="M18.5 4v3M20 5.5h-3"/>',
+    bulb: '<path d="M9.5 17.5h5M10.5 20.5h3M8.6 14.5a5 5 0 1 1 6.8 0c-.8.7-1.4 1.4-1.4 2.5h-4c0-1.1-.6-1.8-1.4-2.5Z"/>',
+    gift: '<rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M4 13h16M12 9v11M8.5 9C6 9 6 5.5 8.5 5.5 10.7 5.5 12 9 12 9s1.3-3.5 3.5-3.5C18 5.5 18 9 15.5 9"/>',
+    breath: '<path d="M3 8h9a2.5 2.5 0 1 0-2.5-2.6M3 12h13a3 3 0 1 1-3 3M3 16h8a2.2 2.2 0 1 1-2.2 2.2"/>',
+    tag: '<path d="M4 4h7l9 9-7 7-9-9V4Z"/><circle cx="8" cy="8" r="1.1" fill="currentColor" stroke="none"/>',
+    coffee: '<path d="M5 8.5h12v4.5a5 5 0 0 1-10 0V8.5ZM17 9.5h2a2 2 0 0 1 0 4h-2M6 3c0 1 1 1 1 2M10 3c0 1 1 1 1 2M14 3c0 1 1 1 1 2M4.5 20.5h14"/>',
+    document: '<path d="M6 3h7l5 5v13H6V3Z"/><path d="M13 3v5h5M9 13h6M9 16.5h6"/>',
+    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/>',
+    pin: '<path d="M12 21c4-4.5 7-7.6 7-11a7 7 0 1 0-14 0c0 3.4 3 6.5 7 11Z"/><circle cx="12" cy="10" r="2.6"/>',
+    user: '<circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>'
+  };
+  function iconSVG(name, cls) {
+    const inner = ICON_PATHS[name];
+    if (!inner) return "";
+    return `<svg class="ico-svg${cls ? " " + cls : ""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${inner}</svg>`;
+  }
+  window.wsIcon = iconSVG;
+  const iconTag = (name, cls) => `<span class="ico${cls ? " " + cls : ""}">${iconSVG(name)}</span>`;
+  function hydrateIcons(root = document) {
+    $$("[data-ico]", root).forEach(el => {
+      const name = el.getAttribute("data-ico");
+      const svg = iconSVG(name);
+      if (svg) el.innerHTML = svg;
+    });
+  }
+
   /* 1. TOAST --------------------------------------------------------------- */
   let toastEl, toastTimer;
-  function toast(msg, icon = "✅") {
+  function toast(msg, icon = "check") {
     if (!toastEl) {
       toastEl = document.createElement("div");
       toastEl.className = "toast";
       document.body.appendChild(toastEl);
     }
-    toastEl.innerHTML = `<span>${icon}</span><span>${msg}</span>`;
+    toastEl.innerHTML = `<span class="ico">${iconSVG(icon) || iconSVG("check")}</span><span>${msg}</span>`;
     toastEl.classList.add("show");
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toastEl.classList.remove("show"), 3200);
@@ -62,7 +142,11 @@
     }));
   }
   function updateToggleIcon(theme) {
-    $$(".theme-toggle").forEach(b => (b.textContent = theme === "dark" ? "☀️" : "🌙"));
+    const svg = iconSVG(theme === "dark" ? "sun" : "moon");
+    $$(".theme-toggle").forEach(b => {
+      b.innerHTML = svg;
+      b.setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+    });
   }
 
   /* 3. NAVIGATION ---------------------------------------------------------- */
@@ -114,10 +198,17 @@
     const items = $$(".reveal");
     if ("IntersectionObserver" in window && items.length) {
       const io = new IntersectionObserver((entries) => {
-        entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+        entries.forEach(en => {
+          if (!en.isIntersecting) return;
+          const el = en.target;
+          el.classList.add("in");
+          io.unobserve(el);
+          // drop the compositor hint once the reveal has finished so it can't shimmer
+          setTimeout(() => el.classList.add("settled"), 760);
+        });
       }, { threshold: 0.12 });
       items.forEach(el => io.observe(el));
-    } else items.forEach(el => el.classList.add("in"));
+    } else items.forEach(el => el.classList.add("in", "settled"));
 
     // scroll progress bar
     let bar = $("#scrollProgress");
@@ -212,7 +303,7 @@
       const D = $(".cd-days", el), H = $(".cd-hours", el), M = $(".cd-mins", el), S = $(".cd-secs", el);
       function tick() {
         const diff = target - Date.now();
-        if (diff <= 0) { el.innerHTML = '<p class="big" style="color:var(--green-dark)">🎉 The event is live now!</p>'; clearInterval(t); return; }
+        if (diff <= 0) { el.innerHTML = `<p class="big" style="color:var(--green-dark)">${iconTag("celebrate")} The event is live now!</p>`; clearInterval(t); return; }
         const d = Math.floor(diff / 864e5), h = Math.floor(diff % 864e5 / 36e5),
               m = Math.floor(diff % 36e5 / 6e4), s = Math.floor(diff % 6e4 / 1e3);
         if (D) D.textContent = String(d).padStart(2, "0");
@@ -259,12 +350,12 @@
         const success = $(".form-success", form);
         if (allOk) {
           if (success) { success.style.display = "flex"; }
-          toast(form.dataset.successMsg || "Submitted successfully! 🎉", "🎉");
+          toast(form.dataset.successMsg || "Submitted successfully!", form.dataset.successIcon || "celebrate");
           form.reset();
           fields.forEach(f => f.classList.remove("valid", "invalid"));
           if (success) setTimeout(() => (success.style.display = "none"), 6000);
         } else {
-          toast("Please fix the highlighted fields.", "⚠️");
+          toast("Please fix the highlighted fields.", "warning");
           const firstBad = $(".field.invalid", form);
           firstBad?.scrollIntoView({ behavior: "smooth", block: "center" });
         }
@@ -275,8 +366,8 @@
     $$("form[data-newsletter]").forEach(form => form.addEventListener("submit", e => {
       e.preventDefault();
       const input = form.querySelector("input");
-      if (validators.email(input.value)) { toast("You're subscribed! Check your inbox 📬", "📬"); form.reset(); }
-      else toast("Please enter a valid email.", "⚠️");
+      if (validators.email(input.value)) { toast("You're subscribed! Check your inbox.", "mail"); form.reset(); }
+      else toast("Please enter a valid email.", "warning");
     }));
   }
 
@@ -311,15 +402,15 @@
       const goal = $("#fitGoal .chip.selected")?.dataset.val;
       const level = $("#fitLevel .chip.selected")?.dataset.val;
       const time = $("#fitTime")?.value;
-      if (!goal || !level) { toast("Pick a goal and an activity level first.", "⚠️"); return; }
+      if (!goal || !level) { toast("Pick a goal and an activity level first.", "warning"); return; }
       const list = workoutDB[goal][level];
       const count = time <= 15 ? 2 : time <= 30 ? 3 : 4;
       const picks = list.slice(0, count);
       out.innerHTML = `
-        <h3>🏋️ Your ${level} ${goal.replace("weightloss","weight-loss")} plan (${time} min)</h3>
+        <h3>${iconTag("dumbbell")} Your ${level} ${goal.replace("weightloss","weight-loss")} plan (${time} min)</h3>
         <p class="muted">Warm up 5 minutes, then complete:</p>
         <ul class="check-list">${picks.map(p => `<li>${p}</li>`).join("")}</ul>
-        <p class="mt-2"><b>Cool down:</b> 5 minutes of light stretching. Stay hydrated! 💧</p>`;
+        <p class="mt-2"><b>Cool down:</b> 5 minutes of light stretching. Stay hydrated.</p>`;
       out.classList.add("show");
       out.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
@@ -334,10 +425,10 @@
 
   /* 10. MOOD TRACKER ------------------------------------------------------- */
   const moodAdvice = {
-    happy:   { icon: "😊", title: "Love that energy!", tips: ["Share your positivity — check in on a friend today", "Channel it into a 20-min workout", "Journal 3 things you're grateful for to lock in the feeling"] },
-    calm:    { icon: "😌", title: "Beautifully balanced", tips: ["Great time for focused study — ride the calm", "Try a 10-min mindfulness session to deepen it", "Do some gentle stretching or a nature walk"] },
-    neutral: { icon: "😐", title: "Let's lift things up", tips: ["A short walk outside can boost your mood fast", "Listen to an upbeat playlist for 10 minutes", "Drink some water and have a healthy snack"] },
-    stressed:{ icon: "😔", title: "Let's ease the pressure", tips: ["Try the 4-7-8 breathing exercise (breathe in 4s, hold 7s, out 8s)", "Break big tasks into small 25-min focus blocks", "Talk to someone — the APU counselling service is free & confidential"] }
+    happy:   { icon: "mood-happy", title: "Love that energy!", tips: ["Share your positivity — check in on a friend today", "Channel it into a 20-min workout", "Journal 3 things you're grateful for to lock in the feeling"] },
+    calm:    { icon: "mood-calm", title: "Beautifully balanced", tips: ["Great time for focused work — ride the calm", "Try a 10-min mindfulness session to deepen it", "Do some gentle stretching or a nature walk"] },
+    neutral: { icon: "mood-neutral", title: "Let's lift things up", tips: ["A short walk outside can boost your mood fast", "Listen to an upbeat playlist for 10 minutes", "Drink some water and have a healthy snack"] },
+    stressed:{ icon: "mood-sad", title: "Let's ease the pressure", tips: ["Try the 4-7-8 breathing exercise (breathe in 4s, hold 7s, out 8s)", "Break big tasks into small 25-min focus blocks", "Talk to someone — a trusted friend or a professional support line is always there"] }
   };
   function initMood() {
     const grid = $("#moodGrid");
@@ -348,7 +439,7 @@
       m.classList.add("selected");
       const data = moodAdvice[m.dataset.mood];
       out.innerHTML = `
-        <h3>${data.icon} ${data.title}</h3>
+        <h3>${iconTag(data.icon)} ${data.title}</h3>
         <ul class="check-list mt-2">${data.tips.map(t => `<li>${t}</li>`).join("")}</ul>`;
       out.classList.add("show");
       // log to dashboard
@@ -371,14 +462,14 @@
         const sel = $(".quiz-opt.selected", q);
         if (sel) { answered++; score += parseInt(sel.dataset.score, 10); }
       });
-      if (answered < questions.length) { toast(`Please answer all ${questions.length} questions.`, "⚠️"); return; }
+      if (answered < questions.length) { toast(`Please answer all ${questions.length} questions.`, "warning"); return; }
       const max = questions.length * 4;
       const pct = Math.round(score / max * 100);
       let verdict, tips;
-      if (pct >= 80) { verdict = "🌟 Wellness Champion"; tips = "Fantastic! Your habits are excellent. Keep the momentum and inspire others."; }
-      else if (pct >= 60) { verdict = "💪 Doing Great"; tips = "Strong foundation! Fine-tune your weakest area — often sleep or hydration."; }
-      else if (pct >= 40) { verdict = "🌱 Room to Grow"; tips = "You're on the path. Pick ONE habit this week — small steps compound fast."; }
-      else { verdict = "🧭 Time for a Reset"; tips = "No judgement! Start tiny: an early night, a water bottle, a 10-min walk."; }
+      if (pct >= 80) { verdict = iconTag("star") + " Wellness Champion"; tips = "Fantastic! Your habits are excellent. Keep the momentum and inspire others."; }
+      else if (pct >= 60) { verdict = iconTag("dumbbell") + " Doing Great"; tips = "Strong foundation! Fine-tune your weakest area — often sleep or hydration."; }
+      else if (pct >= 40) { verdict = iconTag("leaf") + " Room to Grow"; tips = "You're on the path. Pick ONE habit this week — small steps compound fast."; }
+      else { verdict = iconTag("compass") + " Time for a Reset"; tips = "No judgement! Start tiny: an early night, a water bottle, a 10-min walk."; }
       out.innerHTML = `
         <div class="text-center">
           <div class="ring" style="--val:${pct}"><div class="ring-inner"><b>${pct}%</b><small>Wellness Score</small></div></div>
@@ -425,7 +516,7 @@
       if (!w || w <= 0) { out.innerHTML = "<p>Please enter your weight.</p>"; out.classList.add("show"); return; }
       const litres = (w * 0.033 + act * 0.35);
       const glasses = Math.round(litres / 0.25);
-      out.innerHTML = `<h3>💧 ${litres.toFixed(1)} litres / day</h3>
+      out.innerHTML = `<h3>${iconTag("water")} ${litres.toFixed(1)} litres / day</h3>
         <p>That's about <b>${glasses} glasses</b> (250ml each). Keep a bottle on your desk!</p>`;
       out.classList.add("show");
     });
@@ -439,7 +530,7 @@
       if (!age || !h || !w) { out.innerHTML = "<p>Please fill in all fields.</p>"; out.classList.add("show"); return; }
       let bmr = 10 * w + 6.25 * h - 5 * age + (sex === "male" ? 5 : -161);
       const tdee = Math.round(bmr * act);
-      out.innerHTML = `<h3>🔥 ${tdee.toLocaleString()} kcal / day</h3>
+      out.innerHTML = `<h3>${iconTag("flame")} ${tdee.toLocaleString()} kcal / day</h3>
         <p>Maintenance estimate. For weight loss aim ~${(tdee-400).toLocaleString()} kcal; to build muscle ~${(tdee+300).toLocaleString()} kcal.</p>`;
       out.classList.add("show");
     });
@@ -447,16 +538,16 @@
 
   /* 13. DAILY CHALLENGE ---------------------------------------------------- */
   const challenges = [
-    { ic: "💧", t: "Drink 8 glasses of water today", pts: 20 },
-    { ic: "🚶", t: "Walk 5,000 steps", pts: 25 },
-    { ic: "🧘", t: "Meditate for 5 minutes", pts: 15 },
-    { ic: "🤸", t: "Do a 10-minute stretch routine", pts: 15 },
-    { ic: "🥗", t: "Eat 3 servings of vegetables", pts: 20 },
-    { ic: "😴", t: "Sleep at least 7 hours tonight", pts: 25 },
-    { ic: "📵", t: "Take a 1-hour screen break", pts: 15 },
-    { ic: "🙏", t: "Write down 3 things you're grateful for", pts: 15 },
-    { ic: "🌞", t: "Get 15 minutes of sunlight", pts: 15 },
-    { ic: "📞", t: "Check in with a friend or family member", pts: 20 }
+    { ic: "water", t: "Drink 8 glasses of water today", pts: 20 },
+    { ic: "walk", t: "Walk 5,000 steps", pts: 25 },
+    { ic: "meditation", t: "Meditate for 5 minutes", pts: 15 },
+    { ic: "run", t: "Do a 10-minute stretch routine", pts: 15 },
+    { ic: "salad", t: "Eat 3 servings of vegetables", pts: 20 },
+    { ic: "sleep", t: "Sleep at least 7 hours tonight", pts: 25 },
+    { ic: "phone-off", t: "Take a 1-hour screen break", pts: 15 },
+    { ic: "heart", t: "Write down 3 things you're grateful for", pts: 15 },
+    { ic: "sun", t: "Get 15 minutes of sunlight", pts: 15 },
+    { ic: "phone", t: "Check in with a friend or family member", pts: 20 }
   ];
   function initChallenge() {
     const box = $("#challengeBox");
@@ -464,7 +555,7 @@
     const btn = $("#challengeNew");
     const done = $("#challengeDone");
     function render(ch) {
-      $("#challengeIcon", box) && ($("#challengeIcon", box).textContent = ch.ic);
+      $("#challengeIcon", box) && ($("#challengeIcon", box).innerHTML = iconSVG(ch.ic));
       $("#challengeText", box) && ($("#challengeText", box).textContent = ch.t);
       $("#challengePts", box) && ($("#challengePts", box).textContent = "+" + ch.pts + " points");
       box.dataset.pts = ch.pts;
@@ -475,7 +566,7 @@
     btn?.addEventListener("click", () => render(challenges[Math.floor(Math.random() * challenges.length)]));
     done?.addEventListener("click", () => {
       addPoints(parseInt(box.dataset.pts, 10) || 10);
-      toast("Challenge complete! Points added 🎉", "🏆");
+      toast("Challenge complete! Points added.", "trophy");
     });
   }
 
@@ -529,10 +620,10 @@
     const sug = $("#dashSuggestions");
     if (sug) {
       const list = [];
-      if (p.water < 8) list.push("💧 Drink " + (8 - p.water) + " more glass(es) of water");
-      if (p.steps < 8000) list.push("🚶 Walk " + (8000 - p.steps).toLocaleString() + " more steps");
-      if (p.mind < 3) list.push("🧘 Do " + (3 - p.mind) + " more mindfulness session(s)");
-      if (!list.length) list.push("🌟 All goals hit — you're crushing it today!");
+      if (p.water < 8) list.push(iconTag("water") + " Drink " + (8 - p.water) + " more glass(es) of water");
+      if (p.steps < 8000) list.push(iconTag("walk") + " Walk " + (8000 - p.steps).toLocaleString() + " more steps");
+      if (p.mind < 3) list.push(iconTag("meditation") + " Do " + (3 - p.mind) + " more mindfulness session(s)");
+      if (!list.length) list.push(iconTag("star") + " All goals hit — you're crushing it today!");
       sug.innerHTML = list.map(x => `<li>${x}</li>`).join("");
     }
     updateBadges();
@@ -563,12 +654,12 @@
       p[key] = Math.max(0, (p[key] || 0) + amt);
       p.points += amt > 0 ? (key === "steps" ? 1 : 5) : 0;
       saveProfile(p); renderDashboard();
-      if (amt > 0) toast("Logged! Keep it up 💪", "✅");
+      if (amt > 0) toast("Logged! Keep it up.", "check");
     }));
     $("#dashReset")?.addEventListener("click", () => {
       if (confirm("Reset today's progress? (Points & streak are kept)")) {
         const p = getProfile(); p.water = 0; p.steps = 0; p.mind = 0; saveProfile(p); renderDashboard();
-        toast("Today's trackers reset.", "🔄");
+        toast("Today's trackers reset.", "refresh");
       }
     });
     // reflect quiz score if present
@@ -608,6 +699,27 @@
     }));
   }
 
+  /* 15b. PARALLAX (hero doodles) ------------------------------------------- */
+  function initParallax() {
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const els = $$("[data-parallax]");
+    if (!els.length) return;
+    let ticking = false;
+    const update = () => {
+      const y = window.scrollY || window.pageYOffset || 0;
+      els.forEach(el => {
+        const sp = parseFloat(el.dataset.parallax) || 0;
+        // uses `transform`; the doodles' floaty animation uses `translate`, so the two compose smoothly
+        el.style.transform = `translate3d(0, ${(y * sp).toFixed(1)}px, 0)`;
+      });
+      ticking = false;
+    };
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+  }
+
   /* 16. MISC --------------------------------------------------------------- */
   function initMisc() {
     $$("[data-year]").forEach(el => (el.textContent = new Date().getFullYear()));
@@ -615,8 +727,9 @@
 
   /* BOOT ------------------------------------------------------------------- */
   document.addEventListener("DOMContentLoaded", () => {
+    hydrateIcons();
     initTheme(); initNav(); initScrollFX(); initCarousels(); initAccordion();
     initCountdowns(); initForms(); initFitness(); initMood(); initQuiz();
-    initCalculators(); initChallenge(); initDashboard(); initGallery(); initMisc();
+    initCalculators(); initChallenge(); initDashboard(); initGallery(); initParallax(); initMisc();
   });
 })();

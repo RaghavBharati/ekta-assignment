@@ -9,6 +9,6 @@
   </defs>
   <rect width="800" height="700" fill="url(#g)"/>
   <rect width="800" height="700" fill="url(#dots)"/>
-  <text x="50%" y="46%" font-size="175" text-anchor="middle" dominant-baseline="central">🧠</text>
-  <text x="50%" y="74%" font-size="50" fill="#ffffff" font-family="Poppins,Segoe UI,Arial" font-weight="700" text-anchor="middle" opacity="0.95">Mindfulness</text>
+  <g transform="translate(328.2 250.2) scale(5.979)" fill="none" stroke="#ffffff" color="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.96"><path d="M9.5 4.2A2.6 2.6 0 0 0 6.4 6.6 2.8 2.8 0 0 0 5 12a2.8 2.8 0 0 0 2 4.4A2.4 2.4 0 0 0 11.5 17V5.5A2.4 2.4 0 0 0 9.5 4.2Z"/><path d="M14.5 4.2A2.6 2.6 0 0 1 17.6 6.6 2.8 2.8 0 0 1 19 12a2.8 2.8 0 0 1-2 4.4A2.4 2.4 0 0 1 12.5 17"/></g>
+  <text x="50%" y="74%" font-size="50" fill="#ffffff" font-family="Lora,Georgia,serif" font-weight="700" text-anchor="middle" opacity="0.95">Mindfulness</text>
 </svg>
