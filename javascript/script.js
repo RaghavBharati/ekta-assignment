@@ -710,14 +710,201 @@
       const y = window.scrollY || window.pageYOffset || 0;
       els.forEach(el => {
         const sp = parseFloat(el.dataset.parallax) || 0;
-        // uses `transform`; the doodles' floaty animation uses `translate`, so the two compose smoothly
-        el.style.transform = `translate3d(0, ${(y * sp).toFixed(1)}px, 0)`;
+        // uses the `translate` property; the doodles' floaty animation uses `transform`
+        // (GPU-composited), so the two compose smoothly without fighting over one property
+        el.style.translate = `0 ${(y * sp).toFixed(1)}px`;
       });
       ticking = false;
     };
     const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
     window.addEventListener("scroll", onScroll, { passive: true });
     update();
+  }
+
+  /* 15c. GENERIC MODAL (video / audio / article popups) -------------------- */
+  let modalEl, lastFocused;
+  function ensureModal() {
+    if (modalEl) return modalEl;
+    modalEl = document.createElement("div");
+    modalEl.className = "ws-modal";
+    modalEl.innerHTML =
+      '<div class="ws-modal-panel" role="dialog" aria-modal="true">' +
+      '<button class="ws-modal-close" aria-label="Close">&times;</button>' +
+      '<div class="ws-modal-body"></div></div>';
+    document.body.appendChild(modalEl);
+    modalEl.addEventListener("click", e => {
+      if (e.target === modalEl || e.target.closest(".ws-modal-close")) closeModal();
+    });
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && modalEl.classList.contains("open")) closeModal();
+    });
+    return modalEl;
+  }
+  function openModal(html, variant) {
+    const m = ensureModal();
+    lastFocused = document.activeElement;
+    const panel = $(".ws-modal-panel", m);
+    panel.className = "ws-modal-panel" + (variant ? " " + variant : "");
+    const body = $(".ws-modal-body", m);
+    body.innerHTML = html;
+    hydrateIcons(body);
+    m.classList.add("open");
+    document.body.classList.add("modal-open");
+    $(".ws-modal-close", m).focus();
+  }
+  function closeModal() {
+    if (!modalEl) return;
+    // stop any playing media before clearing
+    $$("video, audio", modalEl).forEach(el => { try { el.pause(); } catch (e) {} });
+    modalEl.classList.remove("open");
+    document.body.classList.remove("modal-open");
+    $(".ws-modal-body", modalEl).innerHTML = "";
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+
+  /* 15d. MEDIA POPUPS — routine videos & guided-audio sessions ------------- */
+  function initMediaPopups() {
+    const cards = $$("[data-media-src]");
+    if (!cards.length) return;
+    cards.forEach(card => {
+      card.classList.add("has-media");
+      const open = () => {
+        const src   = encodeURI(card.getAttribute("data-media-src"));
+        const type  = card.getAttribute("data-media-type") || "video";
+        const title = card.getAttribute("data-media-title") || "";
+        const desc  = card.getAttribute("data-media-desc") || "";
+        const media = type === "audio"
+          ? `<div class="ws-audio-wrap">${iconTag("meditation")}` +
+            `<audio controls autoplay src="${src}">Your browser can’t play this audio.</audio></div>`
+          : `<video controls autoplay playsinline src="${src}">Your browser can’t play this video.</video>`;
+        openModal(
+          media +
+          `<div class="ws-modal-caption"><h3>${title}</h3>` +
+          (desc ? `<p class="muted">${desc}</p>` : "") + `</div>`,
+          type === "audio" ? "is-audio" : "is-video"
+        );
+      };
+      card.addEventListener("click", open);
+      card.addEventListener("keydown", e => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
+      });
+    });
+  }
+
+  /* 15e. BLOG ARTICLE POPUPS ----------------------------------------------- */
+  const ARTICLES = {
+    "sleep-well-busy": {
+      badge: "Lifestyle", img: "../images/blog1.svg",
+      title: "How to Actually Sleep Well When Life Is Busy",
+      meta: "By Aisyah Rahman · 1 July 2026 · 7 min read",
+      body: `
+        <p>Late nights feel productive, but they quietly wreck the memory consolidation your brain does while you sleep. Skimp on rest and everything else — focus, mood, appetite, willpower — gets harder the next day. The good news: you don't need a perfect eight hours to feel the difference. You need a routine your body can rely on.</p>
+        <h3>Wind down on purpose</h3>
+        <p>Give yourself a 30-minute runway before bed. Dim the lights, put your phone on the other side of the room, and do something low-stakes — read a few pages, stretch, or simply sit. The goal is to signal to your nervous system that the day is over.</p>
+        <h3>Watch the afternoon caffeine</h3>
+        <p>Caffeine has a half-life of roughly five to six hours, so that 3pm coffee is still half-active at 9pm — sabotaging the deep sleep that actually restores you. Switch to water or herbal tea after lunch and notice how much faster you drift off.</p>
+        <h3>The 10-minute brain dump</h3>
+        <p>If racing thoughts keep you up, keep a notebook by the bed and write tomorrow's worries down before you switch off. Externalising the list tells your brain it's safe to stop rehearsing it. Start with just one of these tonight — small, consistent tweaks beat a perfect routine you can't keep.</p>`
+    },
+    "better-sleep-schedule": {
+      badge: "Lifestyle", img: "../images/blog1.svg",
+      title: "Better Sleep on a Busy Schedule",
+      meta: "28 Jun 2026 · 5 min read",
+      body: `
+        <p>Irregular shifts and early starts make consistent sleep feel impossible — but your body clock cares less about <em>when</em> you sleep and more about <em>how regularly</em> you do it.</p>
+        <h3>Anchor your wake-up time</h3>
+        <p>Pick a wake-up time you can hit seven days a week — yes, even on weekends — and hold it. A steady morning anchor resets your circadian rhythm far more powerfully than chasing a fixed bedtime. Within a week or two, you'll start feeling sleepy at a consistent hour on your own.</p>
+        <h3>Tune your bedroom</h3>
+        <p>Cool, dark and quiet wins. Aim for around 18°C, block stray light, and keep screens out of arm's reach. If noise is an issue, a fan or white-noise track smooths over the sudden sounds that jolt you awake.</p>
+        <p>Change one thing this week, not five. Consistency is the habit that compounds.</p>`
+    },
+    "beating-stress": {
+      badge: "Mind", img: "../images/blog2.svg",
+      title: "Beating Stress Before It Beats You",
+      meta: "24 Jun 2026 · 6 min read",
+      body: `
+        <p>A little pressure sharpens focus; too much freezes it. The skill isn't avoiding stress altogether — it's spotting it early and having a couple of reliable ways to let it out.</p>
+        <h3>Know your early signals</h3>
+        <p>Tight shoulders, a clenched jaw, snapping at small things, doom-scrolling — these are your body's check-engine lights. Naming the signal is half the battle, because it turns a vague overwhelm into something you can actually act on.</p>
+        <h3>Box breathing</h3>
+        <p>Breathe in for four counts, hold for four, out for four, hold for four. Three or four rounds tells your nervous system the danger has passed. It works anywhere — at your desk, on the bus, before a hard conversation.</p>
+        <h3>The worry window</h3>
+        <p>Instead of worrying all day, book a fixed 15 minutes to worry on purpose. When anxious thoughts pop up outside that window, jot them down for later. Most lose their grip by the time the window arrives — and if something still feels too heavy, reaching out to a counselling service is a sign of strength, not weakness.</p>`
+    },
+    "staying-hydrated": {
+      badge: "Nutrition", img: "../images/blog3.svg",
+      title: "Staying Hydrated When You're Always Busy",
+      meta: "20 Jun 2026 · 4 min read",
+      body: `
+        <p>Mild dehydration shows up as brain fog and afternoon fatigue long before you actually feel thirsty. By the time your mouth is dry, you're already behind.</p>
+        <h3>How much do you really need?</h3>
+        <p>A rough guide is about 30ml per kilo of body weight, plus extra for exercise and hot days. Coffee and tea count a little, but caffeine is a mild diuretic, so don't rely on them alone.</p>
+        <h3>Make it automatic</h3>
+        <p>Keep a bottle within arm's reach and stack the habit onto things you already do: a glass when you wake, one before each meal, one when you sit down to work. A visible bottle you refill twice is far easier than remembering to count. Add a slice of lemon or cucumber if plain water bores you.</p>`
+    },
+    "small-space-workouts": {
+      badge: "Fitness", img: "../images/blog4.svg",
+      title: "Small-Space Workouts With Zero Equipment",
+      meta: "16 Jun 2026 · 8 min read",
+      body: `
+        <p>No gym membership and barely any floor space? No problem. Your own bodyweight and a sturdy chair are enough to build real strength and mobility at home.</p>
+        <h3>A 20-minute circuit</h3>
+        <p>Move through the following with good control, rest a minute, and repeat for three rounds:</p>
+        <ul class="check-list">
+          <li>Bodyweight squats — 12 reps</li>
+          <li>Incline push-ups against a desk — 10 reps</li>
+          <li>Reverse lunges — 8 per leg</li>
+          <li>Glute bridges — 15 reps</li>
+          <li>Plank — hold 30 seconds</li>
+        </ul>
+        <h3>Keep it neighbour-friendly</h3>
+        <p>Swap jumping moves for step-backs and land softly with bent knees. Focus on control over speed — slow, deliberate reps build more strength and make far less noise. Consistency three times a week beats one heroic session you're too sore to repeat.</p>`
+    },
+    "eating-budget": {
+      badge: "Nutrition", img: "../images/blog5.svg",
+      title: "Eating Well on a Tight Budget",
+      meta: "12 Jun 2026 · 7 min read",
+      body: `
+        <p>Healthy eating doesn't have to drain your wallet. A handful of cheap, nutrient-dense staples and a little batch cooking go a long way.</p>
+        <h3>Stock the flexible basics</h3>
+        <p>Oats, eggs, rice, lentils, frozen vegetables, tinned beans and seasonal produce give you dozens of meals for very little. Frozen veg is picked and frozen at peak ripeness, so it's often more nutritious than tired fresh produce — and it never wilts in the back of the fridge.</p>
+        <h3>Three 15-minute meals</h3>
+        <ul class="check-list">
+          <li>Loaded lentil soup with whatever veg needs using up</li>
+          <li>Egg fried rice with frozen peas and a splash of soy</li>
+          <li>Bean-and-veg wraps with a squeeze of lime</li>
+        </ul>
+        <p>Cook once, eat twice. Doubling a recipe and freezing half turns a busy week into a stack of ready meals — saving both money and the 6pm "what's for dinner" panic.</p>`
+    },
+    "morning-routine": {
+      badge: "Lifestyle", img: "../images/blog6.svg",
+      title: "Building a Morning Routine That Sticks",
+      meta: "8 Jun 2026 · 5 min read",
+      body: `
+        <p>Perfect five-step morning routines look great online but rarely survive a real, busy week. The routines that last are almost always smaller than you'd expect.</p>
+        <h3>Start with one keystone habit</h3>
+        <p>Pick a single action that makes the rest of your morning better — a glass of water, five minutes of stretching, or simply making the bed. One win you never skip beats five you abandon by Wednesday.</p>
+        <h3>Attach it to something you already do</h3>
+        <p>Habit stacking is the trick: "after I start the kettle, I stretch." The existing habit becomes the reminder, so you're not relying on motivation or memory. Once it feels automatic, add the next small piece.</p>
+        <p>Grow slowly. A calm, reliable two-minute routine will outlast an ambitious one every single time.</p>`
+    }
+  };
+  function initArticles() {
+    $$("[data-article]").forEach(link => link.addEventListener("click", e => {
+      e.preventDefault();
+      const a = ARTICLES[link.getAttribute("data-article")];
+      if (!a) return;
+      openModal(
+        `<img class="ws-article-hero" src="${a.img}" alt="">` +
+        `<div class="ws-article-body">` +
+          (a.badge ? `<span class="badge green">${a.badge}</span>` : "") +
+          `<h2>${a.title}</h2>` +
+          `<div class="article-meta">${a.meta}</div>` +
+          a.body +
+        `</div>`,
+        "is-article"
+      );
+    }));
   }
 
   /* 16. MISC --------------------------------------------------------------- */
@@ -730,6 +917,7 @@
     hydrateIcons();
     initTheme(); initNav(); initScrollFX(); initCarousels(); initAccordion();
     initCountdowns(); initForms(); initFitness(); initMood(); initQuiz();
-    initCalculators(); initChallenge(); initDashboard(); initGallery(); initParallax(); initMisc();
+    initCalculators(); initChallenge(); initDashboard(); initGallery(); initParallax();
+    initMediaPopups(); initArticles(); initMisc();
   });
 })();

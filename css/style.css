@@ -290,7 +290,7 @@ h1 .ico, h2 .ico, h3 .ico, h4 .ico, .badge .ico { margin-right: .12em; }
 .hero-doodles { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .doodle {
   position: absolute; color: rgba(255,255,255,.5);
-  width: clamp(96px, 15vw, 230px); will-change: transform, translate;
+  width: clamp(96px, 15vw, 230px); will-change: transform;
   animation: floaty 7s ease-in-out infinite;
 }
 .doodle svg { width: 100%; height: auto; display: block; }
@@ -477,16 +477,17 @@ h1 .ico, h2 .ico, h3 .ico, h4 .ico, .badge .ico { margin-right: .12em; }
 .calc-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 1.5rem; }
 
 /* Badges / gamification */
-.badge-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 1.2rem; }
+.badge-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 1.4rem; }
 .trophy {
-  text-align: center; padding: 1.5rem 1rem; border-radius: var(--radius);
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  text-align: center; padding: 1.75rem 1.15rem; border-radius: var(--radius);
   border: 1px solid var(--line); background: var(--surface); transition: .3s;
 }
 .trophy.earned { background: var(--grad-soft); border-color: var(--green); }
 .trophy.locked { opacity: .5; filter: grayscale(.6); }
-.trophy .ic { font-size: 2.6rem; display: block; margin-bottom: .5rem; }
-.trophy .t-name { font-weight: 700; font-family: var(--font-head); color: var(--ink); font-size: .95rem; }
-.trophy .t-desc { font-size: .78rem; color: var(--muted); }
+.trophy .ic { font-size: 2.6rem; display: block; margin-bottom: .75rem; }
+.trophy .t-name { display: block; font-weight: 700; font-family: var(--font-head); color: var(--ink); font-size: .98rem; line-height: 1.3; }
+.trophy .t-desc { display: block; margin-top: .35rem; font-size: .8rem; line-height: 1.4; color: var(--muted); }
 
 /* Accordion (FAQ) */
 .accordion { display: grid; gap: .8rem; }
@@ -556,6 +557,61 @@ h1 .ico, h2 .ico, h3 .ico, h4 .ico, .badge .ico { margin-right: .12em; }
 .lightbox.open { display: flex; animation: fade .3s; }
 .lightbox img { max-height: 85vh; border-radius: var(--radius); box-shadow: var(--shadow-lg); }
 .lightbox .close { position: absolute; top: 1.5rem; right: 2rem; color: #fff; font-size: 2.5rem; }
+
+/* Generic modal — video / audio / article popups */
+body.modal-open { overflow: hidden; }
+.ws-modal {
+  position: fixed; inset: 0; z-index: 2100; background: rgba(15,23,42,.9);
+  display: none; align-items: center; justify-content: center; padding: 1.5rem;
+}
+.ws-modal.open { display: flex; animation: fade .3s; }
+.ws-modal-panel {
+  position: relative; background: var(--surface); color: var(--ink);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+  width: 100%; max-width: 860px; max-height: 90vh; overflow: auto;
+  animation: pop .35s var(--ease);
+}
+.ws-modal-panel.is-article { max-width: 720px; }
+.ws-modal-panel.is-audio { max-width: 440px; }
+.ws-modal-close {
+  position: absolute; top: .6rem; right: .8rem; z-index: 2; width: 2.2rem; height: 2.2rem;
+  display: grid; place-items: center; border-radius: 50%; font-size: 1.6rem; line-height: 1;
+  color: #fff; background: rgba(15,23,42,.55); cursor: pointer;
+}
+.ws-modal-close:hover { background: rgba(15,23,42,.8); }
+.ws-modal-panel video { display: block; width: 100%; max-height: 66vh; background: #000;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+.ws-modal-caption { padding: 1.25rem 1.5rem 1.5rem; }
+.ws-modal-caption h3 { margin: 0; }
+.ws-modal-caption p { margin: .4rem 0 0; }
+.ws-audio-wrap { padding: 2.5rem 1.75rem 1rem; display: grid; place-items: center; gap: 1.25rem; }
+.ws-audio-wrap .ico { font-size: 3.5rem; color: var(--green-dark); }
+[data-theme="dark"] .ws-audio-wrap .ico { color: var(--green); }
+.ws-audio-wrap audio { width: 100%; }
+.ws-modal-panel.is-audio .ws-modal-caption { padding-top: 0; text-align: center; }
+.ws-article-hero { display: block; width: 100%; height: 220px; object-fit: cover;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+.ws-article-body { padding: 1.75rem 2rem 2.25rem; }
+.ws-article-body h2 { margin: .75rem 0 .5rem; }
+.ws-article-body h3 { margin: 1.5rem 0 .4rem; }
+.ws-article-body p { margin: 0 0 1rem; line-height: 1.75; }
+.ws-article-body .article-meta { color: var(--muted); font-size: .9rem; margin-bottom: 1rem; }
+
+/* Cards that open a media popup get a play affordance + pointer */
+.has-media { cursor: pointer; }
+.has-media .media-card__thumb, .has-media img { position: relative; }
+.card.has-media { position: relative; }
+.card.has-media > img:first-child, .card.has-media .thumb { position: relative; }
+.card.has-media::after {
+  content: ""; position: absolute; top: 100px; left: 50%; transform: translate(-50%,-50%);
+  width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,.92);
+  box-shadow: var(--shadow); transition: transform .25s var(--ease), background .25s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='%230f766e'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: 54% center; pointer-events: none;
+}
+.card.has-media:hover::after { transform: translate(-50%,-50%) scale(1.08); background-color: #fff; }
+.card.has-media:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+@media (max-width: 560px) { .ws-article-body { padding: 1.5rem 1.25rem 2rem; } }
 
 /* Blog list */
 .article-card { display: grid; overflow: hidden; }
@@ -669,9 +725,10 @@ h1 .ico, h2 .ico, h3 .ico, h4 .ico, .badge .ico { margin-right: .12em; }
   box-shadow: var(--shadow); border: 1px solid var(--line); background: var(--surface-3);
 }
 .map-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
-/* Gentle float — composited on the GPU so it never judders. Uses the `translate`
-   property (not `transform`) so it can coexist with a `transform`-based reveal. */
-.floaty { animation: floaty 6s ease-in-out infinite; will-change: translate; transform: translateZ(0); backface-visibility: hidden; }
+/* Gentle float — animated with `transform: translate3d`, the only transform that
+   every browser reliably runs on the GPU compositor thread (the standalone
+   `translate` property falls back to the main thread in some engines and judders). */
+.floaty { animation: floaty 6s ease-in-out infinite; will-change: transform; backface-visibility: hidden; }
 
 /* Reveal on scroll — promoted to its own layer to avoid sub-pixel shimmer/shake */
 .reveal {
@@ -685,7 +742,7 @@ h1 .ico, h2 .ico, h3 .ico, h4 .ico, .badge .ico { margin-right: .12em; }
 
 @keyframes pop { from { transform: scale(.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-@keyframes floaty { 0%,100%{ translate: 0 0; } 50%{ translate: 0 -13px; } }
+@keyframes floaty { 0%,100%{ transform: translate3d(0, 0, 0); } 50%{ transform: translate3d(0, -13px, 0); } }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes pulse { 0%,100%{ transform: scale(1);} 50%{ transform: scale(1.06);} }
 
