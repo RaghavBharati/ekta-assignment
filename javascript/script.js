@@ -30,6 +30,80 @@
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
   };
 
+  /* ------------------------------------------------------------------------
+     EMAILJS — every form emails the admin AND auto-replies to the visitor.
+     Fill in the four values below from your EmailJS dashboard
+     (https://dashboard.emailjs.com). While they still say "YOUR_…", forms
+     keep working in demo mode (success toast only, no email is sent).
+     ------------------------------------------------------------------------ */
+  const EMAILJS = {
+    publicKey:       "k3as1Btku8I62N2A4",        // Account → General → Public Key
+    serviceId:       "service_6u36evk",          // Email Services → Service ID
+    adminTemplateId: "template_0orpan1",         // template that emails the admin
+    userTemplateId:  "template_db5dr5j",         // template that auto-replies to the visitor
+    adminEmail:      "ektaroyy2580@gmail.com"
+  };
+  const notPlaceholder = v => v && !/^YOUR_/.test(v);
+  function emailConfigured() {
+    return typeof window.emailjs !== "undefined" &&
+      notPlaceholder(EMAILJS.publicKey) && notPlaceholder(EMAILJS.serviceId) && notPlaceholder(EMAILJS.adminTemplateId);
+  }
+  function initEmail() {
+    if (typeof window.emailjs !== "undefined" && notPlaceholder(EMAILJS.publicKey)) {
+      try { window.emailjs.init({ publicKey: EMAILJS.publicKey }); } catch (e) {}
+    }
+  }
+  // Pull name / email / a readable summary out of any form without needing name="" attrs
+  function collectForm(form) {
+    const data = { name: "", email: "", pairs: [] };
+    $$(".field", form).forEach(f => {
+      const input = f.querySelector("input,select,textarea");
+      if (!input) return;
+      const labelEl = f.querySelector("label");
+      const label = (labelEl ? labelEl.textContent : (input.placeholder || "Field")).replace(/\*/g, "").trim();
+      if (input.type === "checkbox") { data.pairs.push([label, input.checked ? "Yes" : "No"]); return; }
+      const val = (input.value || "").trim();
+      if (!val) return;
+      data.pairs.push([label, val]);
+      if (input.type === "email" && !data.email) data.email = val;
+      if (/name/.test(input.dataset.validate || "") && !data.name) data.name = val;
+    });
+    data.message = data.pairs.map(([k, v]) => `${k}: ${v}`).join("\n");
+    return data;
+  }
+  function formTypeFor(form) {
+    if (form.matches("[data-newsletter]")) return "Newsletter signup";
+    const m = (form.dataset.successMsg || "").toLowerCase();
+    if (m.includes("regist")) return "Event registration";
+    if (m.includes("welcome")) return "Membership application";
+    if (m.includes("repl") || m.includes("help")) return "Contact enquiry";
+    return "Website enquiry";
+  }
+  // Sends one email to the admin and, when we have the visitor's address, an auto-reply to them.
+  function sendFormEmails(type, data) {
+    if (!emailConfigured()) return Promise.resolve("skipped");
+    const params = {
+      form_type: type,
+      name: data.name || "Website visitor",
+      email: data.email || "",
+      reply_to: data.email || EMAILJS.adminEmail,
+      message: data.message || "",
+      admin_email: EMAILJS.adminEmail
+    };
+    const jobs = [
+      window.emailjs.send(EMAILJS.serviceId, EMAILJS.adminTemplateId, Object.assign({}, params, { to_email: EMAILJS.adminEmail }))
+    ];
+    if (data.email && notPlaceholder(EMAILJS.userTemplateId)) {
+      jobs.push(window.emailjs.send(EMAILJS.serviceId, EMAILJS.userTemplateId, Object.assign({}, params, { to_email: data.email })));
+    }
+    return Promise.all(jobs).then(() => "sent").catch(err => {
+      const detail = (err && (err.text || err.message)) || JSON.stringify(err);
+      console.error("EmailJS error " + (err && err.status) + ": " + detail, err);
+      window.__wsLastEmailError = err;   // inspect in console after a failed submit
+      return "error";
+    });
+  }
+
   /* 0. SVG ICON SYSTEM ----------------------------------------------------- */
   /* Clean, single-weight line icons drawn with currentColor so they inherit
      text colour and scale with font-size. Replaces all decorative emoji. */
@@ -348,17 +422,26 @@
         let allOk = true;
         fields.forEach(f => { if (!validateField(f)) allOk = false; });
         const success = $(".form-success", form);
-        if (allOk) {
+        if (!allOk) {
+          toast("Please fix the highlighted fields.", "warning");
+          const firstBad = $(".field.invalid", form);
+          firstBad?.scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+        const collected = collectForm(form);
+        const btn = form.querySelector('[type="submit"]');
+        const restore = btn ? btn.innerHTML : "";
+        const sending = emailConfigured();
+        if (btn && sending) { btn.disabled = true; btn.innerHTML = "Sending…"; }
+        sendFormEmails(formTypeFor(form), collected).then(status => {
+          if (btn && sending) { btn.disabled = false; btn.innerHTML = restore; }
+          if (status === "error") { toast("Couldn't send right now — please try again.", "warning"); return; }
           if (success) { success.style.display = "flex"; }
           toast(form.dataset.successMsg || "Submitted successfully!", form.dataset.successIcon || "celebrate");
           form.reset();
           fields.forEach(f => f.classList.remove("valid", "invalid"));
           if (success) setTimeout(() => (success.style.display = "none"), 6000);
-        } else {
-          toast("Please fix the highlighted fields.", "warning");
-          const firstBad = $(".field.invalid", form);
-          firstBad?.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
+        });
       });
     });
 
@@ -366,8 +449,17 @@
     $$("form[data-newsletter]").forEach(form => form.addEventListener("submit", e => {
       e.preventDefault();
       const input = form.querySelector("input");
-      if (validators.email(input.value)) { toast("You're subscribed! Check your inbox.", "mail"); form.reset(); }
-      else toast("Please enter a valid email.", "warning");
+      if (!input || !validators.email(input.value)) { toast("Please enter a valid email.", "warning"); return; }
+      const email = input.value.trim();
+      const btn = form.querySelector("button");
+      const sending = emailConfigured();
+      if (btn && sending) btn.disabled = true;
+      sendFormEmails("Newsletter signup", { name: "", email, message: "New newsletter subscription: " + email, pairs: [] }).then(status => {
+        if (btn && sending) btn.disabled = false;
+        if (status === "error") { toast("Couldn't subscribe right now — please try again.", "warning"); return; }
+        toast("You're subscribed! Check your inbox.", "mail");
+        form.reset();
+      });
     }));
   }
 
@@ -907,6 +999,106 @@
     }));
   }
 
+  /* 15f. INFORMATIONAL CARD POPUPS ---------------------------------------- */
+  // Optional richer copy shown under a card's own content, keyed by a
+  // normalised title. Cards with no entry still open a popup that shows their
+  // full existing content in a focused reading view.
+  const INFO_EXTRA = {
+    // ----- Events -----
+    "stress-free-wellness-week": `<p>Across the week you can drop into short, come-as-you-are sessions: guided meditations, gentle breathing drills, and quiet reset corners with free herbal tea. No booking, no pressure — stay for five minutes or the full hour.</p><p>Perfect if deadlines have you frazzled and you want a calm, judgement-free space to breathe before diving back in.</p>`,
+    "morning-yoga-sessions": `<p>Every Tuesday and Thursday we roll out the mats at 7:30 AM for a gentle flow that suits complete beginners and regulars alike. Expect slow stretches, steady breathing, and a calm, welcoming crowd.</p><p>Mats and props are provided — just bring water and comfy clothes. A lovely way to start the day feeling loose and clear-headed.</p>`,
+    "healthy-cooking-workshop": `<p>A hands-on class where you'll cook three budget-friendly, balanced meals from scratch alongside our community chef. You'll pick up knife skills, smart swaps, and batch-cooking tricks you can repeat at home.</p><p>Everyone leaves with printed recipe cards, a full stomach, and the confidence that eating well doesn't need a big budget.</p>`,
+    "mental-health-awareness-campaign": `<p>A full community day of honest talks, peer-listening booths, and practical workshops on stress, burnout, and looking out for one another. Come to listen, share, or simply be around people who get it.</p><p>Our goal is simple: chip away at the stigma and remind everyone that it's okay to not be okay — and that support is always within reach.</p>`,
+    "fitness-challenge-month": `<p>Thirty days, one goal: move a little every single day. Log your activity, watch your streak grow, climb the community leaderboard, and win small prizes along the way.</p><p>Every level is welcome — a ten-minute walk counts just as much as a full workout. The point is building a habit that outlasts the month.</p>`,
+    "nature-walk-and-talk": `<p>Swap screens for greenery on a relaxed group walk through Shivapuri Nature Park. Easy pace, good conversation, fresh air — and a gentle way to meet new faces outside your usual routine.</p><p>Suitable for all fitness levels. Wear comfortable shoes and bring a water bottle; we'll take our time and enjoy the views.</p>`,
+    // ----- Home programs -----
+    "fitness-and-exercise": `<p>From beginner-friendly home routines to a smart planner that builds a session around your goal and free time, our fitness programme meets you exactly where you are — no gym, no pressure, no experience needed.</p>`,
+    "mental-wellness": `<p>A stigma-free space for your mind: guided breathing, mindfulness sessions, stress-management tools, and an interactive mood tracker that offers caring, tailored suggestions whenever you check in.</p>`,
+    "nutrition-and-eating": `<p>Balanced-plate guides, budget-friendly recipes, and quick meal ideas that don't need a full kitchen. Practical, flexible eating advice designed for real, busy lives — not strict diets.</p>`,
+    // ----- Fitness: routine library -----
+    "10-min-home-hiit": `<h3>How it works</h3><p>A fast, high-intensity circuit you can finish before your coffee cools. Move through each exercise back-to-back, then rest and repeat. No equipment, no commute, no excuses — just ten focused minutes.</p><h3>The full circuit</h3><ul class="check-list"><li>40s jumping jacks</li><li>30s high knees</li><li>30s mountain climbers</li><li>20s rest — then repeat the whole circuit</li></ul><p>Aim for <b>3–4 rounds</b>. Push hard during the work intervals and recover fully in the rest.</p><h3>Tips</h3><p>Warm up with 60 seconds of marching first, land softly with bent knees, and keep breathing steady. Too intense? Swap the jumps for step-outs and march the high knees — the goal is to raise your heart rate, not to hurt your joints.</p><p><b>Best for:</b> busy days, a quick energy boost, or squeezing movement in between tasks.</p>`,
+    "beginner-full-body": `<h3>How it works</h3><p>The perfect starting point if you're new to training. These three moves cover your whole body — legs, chest, arms and core — and teach the fundamentals safely. Do the routine <b>three times a week</b> with a rest day in between.</p><h3>The full routine</h3><ul class="check-list"><li>Bodyweight squats — 3 sets of 10</li><li>Knee push-ups — 3 sets of 8</li><li>Glute bridges — 3 sets of 12</li><li>Rest 45–60 seconds between sets</li></ul><h3>Tips</h3><p>Quality beats quantity — move slowly and with control rather than rushing the reps. As it starts to feel easy, add a fourth set or slow the lowering phase to make each rep harder.</p><p><b>Best for:</b> complete beginners building a foundation of strength and confidence.</p>`,
+    "desk-stretch-breaks": `<h3>How it works</h3><p>Undo hours of hunching over a screen in under five minutes. This gentle sequence resets your posture, loosens tight shoulders and hips, and clears mental fog — no need to change clothes or leave your chair.</p><h3>The sequence</h3><ul class="check-list"><li>Neck &amp; shoulder rolls — 30 seconds each direction</li><li>Seated spinal twist — hold 20 seconds per side</li><li>Standing forward fold — hold 30 seconds, let your head hang</li><li>Chest opener — clasp hands behind you and lift, 20 seconds</li></ul><h3>Tips</h3><p>Move slowly and breathe into each stretch — never force it. Try to take one break every hour or two; a handful of short resets does more for a stiff body than one long stretch at the end of the day.</p><p><b>Best for:</b> desk workers, students, and anyone who sits for long stretches.</p>`,
+    // ----- Fitness: beginner exercises -----
+    "squats": `<p><b>Muscles worked:</b> quads, glutes and core.</p><p><b>Common mistakes:</b> letting the knees cave inward or rounding the lower back. Keep your weight in your heels and your chest proud. Start with a chair behind you for a target if you're unsure how low to go.</p>`,
+    "push-ups": `<p><b>Muscles worked:</b> chest, shoulders, triceps and core.</p><p><b>Make it easier:</b> raise your hands onto a desk or wall, or drop to your knees. <b>Make it harder:</b> slow the lowering phase to three seconds. Keep your body in one straight line the whole time.</p>`,
+    "plank": `<p><b>Muscles worked:</b> the whole core, plus shoulders.</p><p><b>Form cue:</b> squeeze your glutes and brace as if bracing for a light punch — this stops your hips sagging. Two solid 20-second holds beat one saggy minute.</p>`,
+    "lunges": `<p><b>Muscles worked:</b> quads, glutes and balance.</p><p><b>Watch for:</b> the front knee drifting past the toes. Step far enough forward that both knees bend to about 90°, and keep your torso tall. Hold a wall for balance while you learn.</p>`,
+    "glute-bridge": `<p><b>Muscles worked:</b> glutes, hamstrings and lower back.</p><p><b>Form cue:</b> drive through your heels and squeeze at the top for a second before lowering slowly. Great for undoing tight, desk-bound hips.</p>`,
+    "jumping-jacks": `<p><b>Great for:</b> a quick full-body warm-up or a cardio burst.</p><p><b>Joint-friendly tip:</b> land softly with slightly bent knees, and keep a steady rhythm. Swap the jump for a step-out side to side if you need a quieter, lower-impact version.</p>`,
+    // ----- Mental wellness: stress techniques -----
+    "time-management": `<p>Try the "one thing" rule: each morning pick a single most-important task and start there. Pair it with 25-minute focus blocks and short breaks, and an overwhelming week quickly becomes a series of calm, doable wins.</p>`,
+    "the-4-7-8-breath": `<p>Breathe in through your nose for 4 seconds, hold for 7, then exhale slowly through your mouth for 8. The long out-breath is the key — it nudges your nervous system out of "fight or flight."</p><p>Repeat four cycles. If you feel light-headed, simply return to normal breathing and go gentler next time.</p>`,
+    "movement-breaks": `<p>You don't need a workout — just interrupt the sitting. A lap of the room, a few shoulder rolls, or ten star-jumps between tasks clears mental fog and releases tension your body has been quietly holding.</p><p>Set a reminder to move once an hour; your focus and posture will both thank you.</p>`,
+    "sleep-hygiene": `<p>Anchor a steady wake-up time, dim the lights an hour before bed, and keep screens out of arm's reach. A cool, dark, quiet room does most of the work for you.</p><p>Rested minds handle stress far more kindly — protecting sleep is one of the highest-return wellness habits there is.</p>`,
+    "talking-it-out": `<p>Saying a worry out loud shrinks it. Sharing with a friend, mentor, or counsellor helps you untangle your thoughts and reminds you that you're not carrying it alone.</p><p>If things feel heavy, our free and confidential counselling line is always here — reaching out is a sign of strength, not weakness.</p>`,
+    "digital-detox": `<p>Set gentle limits on doom-scrolling and turn off non-essential notifications. Even a short, screen-free pause each day gives your attention room to breathe and reset.</p><p>Try a "no phone for the first 30 minutes" rule in the morning and notice how much calmer the day starts.</p>`,
+    // ----- Nutrition: recipes -----
+    "avocado-toast": `<p><b>Method:</b> toast the bread, mash the avocado with a squeeze of lemon, a pinch of salt and chilli flakes, then pile it on and scatter over the seeds. Ready in about five minutes.</p><p><b>Make it a meal:</b> add a poached egg or a few cherry tomatoes for extra protein and colour.</p>`,
+    "overnight-oats": `<p><b>Method:</b> stir the oats, milk and yoghurt in a jar, top with fruit and a drizzle of honey, then refrigerate overnight. Grab and go in the morning — no cooking at all.</p><p><b>Swap ideas:</b> peanut butter, grated apple and cinnamon, or frozen berries all work beautifully.</p>`,
+    "buddha-bowl": `<p><b>Method:</b> start with a base of cooked rice or quinoa, add roasted or raw veg and a tin of chickpeas, then finish with a tahini or yoghurt dressing. It's the balanced plate in a bowl.</p><p><b>Batch tip:</b> cook the grains and roast a tray of veg at the weekend, then assemble fresh bowls all week.</p>`,
+    "berry-smoothie": `<p><b>Method:</b> blend the frozen berries, banana, milk and a spoon of oats or peanut butter until smooth. Breakfast you can drink on the walk out the door.</p><p><b>Budget tip:</b> frozen fruit is cheaper, lasts for weeks and is picked at peak ripeness — no waste, no fuss.</p>`
+  };
+  function infoKey(str) {
+    return (str || "").toLowerCase().replace(/&amp;|&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  }
+  function membershipHref() {
+    return location.pathname.includes("/pages/") ? "membership.html" : "pages/membership.html";
+  }
+  function initInfoPopups() {
+    const cards = $$("article.card").filter(card =>
+      !card.hasAttribute("data-media-src") &&
+      !card.classList.contains("article-card") &&
+      !card.querySelector("input,select,textarea,button,form,[data-inc],.counter-btn,.progress,.ring,.mood,.chip,[data-carousel]") &&
+      card.querySelector("h2,h3,h4")
+    );
+    cards.forEach(card => {
+      const titleEl = card.querySelector("h2,h3,h4");
+      const title = titleEl ? titleEl.textContent.trim() : "More information";
+      card.classList.add("info-card");
+      if (!card.getAttribute("role")) card.setAttribute("role", "button");
+      if (!card.hasAttribute("tabindex")) card.setAttribute("tabindex", "0");
+      card.setAttribute("aria-label", "More info: " + title);
+      // add a visible "More info" cue if the card has no existing link cue
+      if (!card.querySelector(".info-more, .card-link")) {
+        const host = card.querySelector(".body") || card;
+        const cue = document.createElement("span");
+        cue.className = "info-more";
+        cue.innerHTML = "More info " + iconSVG("compass");
+        host.appendChild(cue);
+      }
+      const open = () => openInfoPopup(card, title);
+      card.addEventListener("click", e => { if (!e.target.closest("a,button")) open(); });
+      card.addEventListener("keydown", e => {
+        if ((e.key === "Enter" || e.key === " ") && !e.target.closest("a,button")) { e.preventDefault(); open(); }
+      });
+    });
+  }
+  function openInfoPopup(card, title) {
+    const clone = card.cloneNode(true);
+    clone.querySelectorAll("a, button, .card-link, .center-btns, .info-more, .card-ic").forEach(el => el.remove());
+    const img = clone.querySelector("img");
+    const imgHtml = img ? `<img class="ws-info-hero" src="${img.getAttribute("src")}" alt="">` : "";
+    const badges = Array.from(clone.querySelectorAll(".badge")).map(b => b.outerHTML).join("");
+    const bodyRoot = clone.querySelector(".body") || clone;
+    bodyRoot.querySelectorAll("img, .badge, .recipe-tags").forEach(el => el.remove());
+    const heading = bodyRoot.querySelector("h1,h2,h3,h4");
+    if (heading) heading.remove();
+    const content = bodyRoot.innerHTML.trim();
+    const extra = INFO_EXTRA[infoKey(title)] || "";
+    const actions = card.hasAttribute("data-register")
+      ? `<div class="ws-info-actions"><a class="btn btn-primary" href="${membershipHref()}">Become a member →</a></div>` : "";
+    openModal(
+      imgHtml +
+      `<div class="ws-info-body">` +
+        (badges ? `<div class="ws-info-badges">${badges}</div>` : "") +
+        `<h2>${title}</h2>` +
+        content + extra + actions +
+      `</div>`,
+      "is-info"
+    );
+  }
+
   /* 16. MISC --------------------------------------------------------------- */
   function initMisc() {
     $$("[data-year]").forEach(el => (el.textContent = new Date().getFullYear()));
@@ -915,9 +1107,10 @@
   /* BOOT ------------------------------------------------------------------- */
   document.addEventListener("DOMContentLoaded", () => {
     hydrateIcons();
+    initEmail();
     initTheme(); initNav(); initScrollFX(); initCarousels(); initAccordion();
     initCountdowns(); initForms(); initFitness(); initMood(); initQuiz();
     initCalculators(); initChallenge(); initDashboard(); initGallery(); initParallax();
-    initMediaPopups(); initArticles(); initMisc();
+    initMediaPopups(); initArticles(); initInfoPopups(); initMisc();
   });
 })();

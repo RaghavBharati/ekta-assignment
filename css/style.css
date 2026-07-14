@@ -491,6 +491,8 @@ h1 .ico, h2 .ico, h3 .ico, h4 .ico, .badge .ico { margin-right: .12em; }
 
 /* Accordion (FAQ) */
 .accordion { display: grid; gap: .8rem; }
+/* Space out stacked FAQ groups: a heading that follows an accordion */
+.accordion + h2 { margin-top: 3.5rem; }
 .acc-item { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
 .acc-head {
   width: 100%; text-align: left; padding: 1.15rem 1.4rem; font-weight: 600;
@@ -597,6 +599,26 @@ body.modal-open { overflow: hidden; }
 .ws-article-body p { margin: 0 0 1rem; line-height: 1.75; }
 .ws-article-body .article-meta { color: var(--muted); font-size: .9rem; margin-bottom: 1rem; }
 
+/* Informational cards that open a "more info" popup */
+.info-card { cursor: pointer; }
+.info-card:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+.info-more { margin-top: 1rem; display: inline-flex; align-items: center; gap: .35rem;
+  font-weight: 700; color: var(--green-dark); font-family: var(--font-head); font-size: .9rem; }
+[data-theme="dark"] .info-more { color: var(--green); }
+.info-card:hover .info-more { text-decoration: underline; }
+.ws-modal-panel.is-info { max-width: 640px; }
+.ws-info-hero { display: block; width: 100%; height: 220px; object-fit: cover;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+.ws-info-body { padding: 1.75rem 2rem 2rem; }
+.ws-info-body h2 { margin: .4rem 0 .75rem; }
+.ws-info-body h3 { margin: 1.25rem 0 .4rem; }
+.ws-info-body p { margin: 0 0 1rem; line-height: 1.7; }
+.ws-info-body ul { margin: 0 0 1rem; }
+.ws-info-badges { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .5rem; }
+.ws-info-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.25rem;
+  padding-top: 1.25rem; border-top: 1px solid var(--line); }
+@media (max-width: 560px) { .ws-info-body { padding: 1.5rem 1.25rem 1.75rem; } }
+
 /* Cards that open a media popup get a play affordance + pointer */
 .has-media { cursor: pointer; }
 .has-media .media-card__thumb, .has-media img { position: relative; }
@@ -650,8 +672,10 @@ body.modal-open { overflow: hidden; }
 
 /* Info list with checks */
 .check-list { display: grid; gap: .8rem; }
-.check-list li { display: flex; gap: .7rem; align-items: flex-start; }
-.check-list li::before { content: "✓"; color: var(--green); font-weight: 800; flex: none; }
+/* Hanging-indent tick: keep the whole line as normal inline text so bold words
+   and the surrounding words keep natural word-spacing (no flex-item gaps). */
+.check-list li { position: relative; padding-left: 1.7rem; }
+.check-list li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--green); font-weight: 800; }
 
 /* Recipe / meal card */
 .recipe-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: .6rem; }

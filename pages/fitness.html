@@ -125,12 +125,7 @@
           <p class="muted">Short, flexible sessions designed for small spaces, short breaks and zero equipment.</p>
         </div>
         <div class="grid grid-3">
-          <article class="card media-card" role="button" tabindex="0"
-            aria-label="Play video: 10-min Home HIIT"
-            data-media-type="video"
-            data-media-src="../videos/fitness/10-min Home HIIT.mp4"
-            data-media-title="10-min Home HIIT"
-            data-media-desc="A sweat-in-a-hurry circuit for the days you only have ten minutes between tasks. No gear, no excuses.">
+          <article class="card media-card">
             <img src="../images/fitness.svg" alt="Person doing a high-intensity home workout">
             <div class="body">
               <span class="badge coral">High energy</span>
@@ -143,12 +138,7 @@
               </ul>
             </div>
           </article>
-          <article class="card media-card" role="button" tabindex="0"
-            aria-label="Play video: Beginner Full-Body"
-            data-media-type="video"
-            data-media-src="../videos/fitness/Beginner Full-Body.mp4"
-            data-media-title="Beginner Full-Body"
-            data-media-desc="The perfect starting point. Learn the core moves that build strength safely, three times a week.">
+          <article class="card media-card">
             <img src="../images/yoga.svg" alt="Beginner practising a full-body strength routine">
             <div class="body">
               <span class="badge green">Foundations</span>
@@ -161,12 +151,7 @@
               </ul>
             </div>
           </article>
-          <article class="card media-card" role="button" tabindex="0"
-            aria-label="Play video: Desk Stretch Breaks"
-            data-media-type="video"
-            data-media-src="../videos/fitness/Desk Stretch Breaks.mp4"
-            data-media-title="Desk Stretch Breaks"
-            data-media-desc="Undo hours of hunching over notes. Reset your posture and shake off tension in under five minutes.">
+          <article class="card media-card">
             <img src="../images/mental.svg" alt="Person stretching at a desk during a short break">
             <div class="body">
               <span class="badge accent">Quick break</span>
@@ -226,10 +211,15 @@
         <div class="section-head">
           <span class="eyebrow">Watch &amp; follow along</span>
           <h2>Fitness video sessions</h2>
-          <p class="muted">Prefer to follow a coach on screen? Our guided video library is on its way — here's a preview.</p>
+          <p class="muted">Prefer to follow a coach on screen? Press play on any session and follow along at home.</p>
         </div>
         <div class="grid grid-3">
-          <article class="card media-card" role="button" tabindex="0" aria-label="Play video: Full-Body Follow-Along" onclick="window.wsToast && wsToast('Video library coming soon!', 'video')">
+          <article class="card media-card" role="button" tabindex="0"
+            aria-label="Play video: Full-Body Follow-Along"
+            data-media-type="video"
+            data-media-src="../videos/fitness/Beginner Full-Body.mp4"
+            data-media-title="Full-Body Follow-Along"
+            data-media-desc="A no-equipment session you can do beside your bed — perfect before breakfast or between tasks.">
             <img src="../images/fitness.svg" alt="Video thumbnail for a full-body follow-along workout">
             <div class="body">
               <span class="badge coral"><span class="ico" data-ico="youtube" aria-hidden="true"></span> 15 min</span>
@@ -237,7 +227,12 @@
               <p class="muted">A no-equipment session you can do beside your bed — perfect before breakfast or between tasks.</p>
             </div>
           </article>
-          <article class="card media-card" role="button" tabindex="0" aria-label="Play video: Morning Mobility Flow" onclick="window.wsToast && wsToast('Video library coming soon!', 'video')">
+          <article class="card media-card" role="button" tabindex="0"
+            aria-label="Play video: Morning Mobility Flow"
+            data-media-type="video"
+            data-media-src="../videos/fitness/morning mobility flow.mp4"
+            data-media-title="Morning Mobility Flow"
+            data-media-desc="Gentle stretches to loosen stiff joints and wake up your body without breaking a sweat.">
             <img src="../images/yoga.svg" alt="Video thumbnail for a morning mobility and stretching flow">
             <div class="body">
               <span class="badge green"><span class="ico" data-ico="youtube" aria-hidden="true"></span> 10 min</span>
@@ -245,7 +240,12 @@
               <p class="muted">Gentle stretches to loosen stiff joints and wake up your body without breaking a sweat.</p>
             </div>
           </article>
-          <article class="card media-card" role="button" tabindex="0" aria-label="Play video: Cardio Burn Blast" onclick="window.wsToast && wsToast('Video library coming soon!', 'video')">
+          <article class="card media-card" role="button" tabindex="0"
+            aria-label="Play video: Cardio Burn Blast"
+            data-media-type="video"
+            data-media-src="../videos/fitness/10-min Home HIIT.mp4"
+            data-media-title="Cardio Burn Blast"
+            data-media-desc="A higher-intensity session to raise your heart rate, boost stamina and clear the mental fog fast.">
             <img src="../images/mental.svg" alt="Video thumbnail for a cardio burn workout session">
             <div class="body">
               <span class="badge accent"><span class="ico" data-ico="youtube" aria-hidden="true"></span> 20 min</span>
@@ -326,6 +326,7 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="../javascript/script.js"></script>
 </body>
 </html>
